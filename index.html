@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#ffb703">
+<title>小星星学习乐园 · 二年级上册</title>
+<style>
+:root{
+  --bg:#fff8e7;--card:#ffffff;--ink:#2b2d42;--muted:#6c757d;
+  --yw:#ff6b6b;--yw2:#ffe3e3;--sx:#4dabf7;--sx2:#e3f2fd;
+  --ok:#2fbf71;--ok2:#e3f9ec;--bad:#ff8c42;--bad2:#fff1e6;--star:#ffb703;
+  --r:22px;--shadow:0 6px 0 rgba(0,0,0,.08),0 10px 24px rgba(0,0,0,.08);
+  --fs:clamp(18px,2.6vmin,26px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Noto Sans SC",sans-serif;font-size:var(--fs);
+  -webkit-user-select:none;user-select:none;overscroll-behavior:none}
+button{font-family:inherit;font-size:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulation}
+.kai{font-family:"Kaiti SC","STKaiti","KaiTi","楷体","AR PL UKai CN","Noto Serif CJK SC",serif}
+.py{font-family:"Arial Rounded MT Bold","Helvetica Neue",Arial,"Noto Sans",sans-serif}
+#app{min-height:100%;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:12px;padding:12px 18px;padding-top:max(12px,env(safe-area-inset-top))}
+.top h1{flex:1;margin:0;font-size:1.25em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{background:var(--card);border-radius:18px;padding:12px 20px;box-shadow:var(--shadow);font-weight:700;min-height:56px;min-width:56px;transition:transform .08s}
+.btn:active{transform:translateY(3px) scale(.98)}
+.btn.pri{background:var(--star);color:#3d2c00}
+.btn.blue{background:var(--sx);color:#fff}
+.btn.red{background:var(--yw);color:#fff}
+.btn.ghost{background:transparent;box-shadow:none}
+.pill{background:#fff;border-radius:999px;padding:8px 16px;font-weight:800;box-shadow:var(--shadow);white-space:nowrap}
+main{flex:1;width:100%;max-width:1040px;margin:0 auto;padding:8px 18px 24px}
+.hero{text-align:center;margin:6px 0 14px}
+.hero .t{font-size:1.9em;font-weight:900;letter-spacing:2px}
+.hero .s{color:var(--muted);margin-top:4px}
+.subjects{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.subj{border-radius:30px;padding:26px 20px;box-shadow:var(--shadow);text-align:center;color:#fff;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.subj .ic{font-size:3.6em;line-height:1}
+.subj .nm{font-size:2em;font-weight:900;letter-spacing:6px}
+.subj .ds{opacity:.95;font-size:.9em}
+.subj.yw{background:linear-gradient(160deg,#ff8787,#fa5252)}
+.subj.sx{background:linear-gradient(160deg,#74c0fc,#339af0)}
+.bar{height:14px;background:rgba(255,255,255,.35);border-radius:9px;overflow:hidden;width:80%;margin-top:6px}
+.bar>i{display:block;height:100%;background:#fff;border-radius:9px}
+.row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+.row .btn{flex:1;min-width:200px;font-size:1.05em}
+.menu{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.mi{background:#fff;border-radius:var(--r);padding:18px;box-shadow:var(--shadow);text-align:left;display:flex;gap:14px;align-items:center;min-height:100px}
+.mi .ic{font-size:2.2em;width:64px;height:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;flex:none}
+.mi b{display:block;font-size:1.1em}
+.mi small{color:var(--muted);font-size:.78em}
+.yw .mi .ic{background:var(--yw2)} .sx .mi .ic{background:var(--sx2)}
+.sec{font-weight:900;margin:22px 4px 10px;font-size:1.05em}
+.seg{display:inline-flex;background:#fff;border-radius:16px;padding:5px;box-shadow:var(--shadow);gap:4px;flex-wrap:wrap}
+.seg button{background:transparent;border-radius:12px;padding:10px 18px;font-weight:800;min-height:48px}
+.seg button.on{background:var(--star);color:#3d2c00}
+.opts-line{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:6px 4px}
+/* quiz */
+.quiz{display:flex;flex-direction:column;gap:16px}
+.prog{display:flex;align-items:center;gap:12px}
+.prog .track{flex:1;height:18px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.08)}
+.prog .track i{display:block;height:100%;background:linear-gradient(90deg,#ffd166,#ffb703);border-radius:10px;transition:width .3s}
+.qcard{background:#fff;border-radius:30px;box-shadow:var(--shadow);padding:22px;text-align:center;position:relative;min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.qcard .tip{color:var(--muted);font-size:.95em}
+.qbig{font-size:5.2em;font-weight:800;line-height:1.15}
+.qmid{font-size:3.4em;font-weight:800;line-height:1.2}
+.qeq{font-size:3.3em;font-weight:900;letter-spacing:2px}
+.qeq .ans{display:inline-block;min-width:1.6em;border-bottom:6px solid var(--star);color:var(--sx)}
+.spk{position:absolute;top:14px;right:14px;width:68px;height:68px;border-radius:50%;background:var(--star);font-size:1.7em;box-shadow:var(--shadow)}
+.spk:disabled{opacity:.3}
+.retry-tag{position:absolute;top:16px;left:16px;background:var(--bad2);color:#c2410c;border-radius:12px;padding:4px 12px;font-size:.8em;font-weight:800}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ch{background:#fff;border-radius:24px;box-shadow:var(--shadow);min-height:110px;font-size:2.4em;font-weight:800;padding:10px;border:4px solid transparent;transition:transform .08s}
+.ch.small{font-size:1.6em}
+.ch:active{transform:scale(.97)}
+.ch.right{background:var(--ok2);border-color:var(--ok);animation:pop .5s}
+.ch.wrong{background:var(--bad2);border-color:var(--bad);animation:shake .4s}
+.ch:disabled{cursor:default}
+.feedback{min-height:64px;border-radius:20px;padding:12px 18px;display:flex;align-items:center;gap:14px;font-weight:800;font-size:1.05em;visibility:hidden}
+.feedback.show{visibility:visible}
+.feedback.ok{background:var(--ok2);color:#137a45}
+.feedback.bad{background:var(--bad2);color:#b45309}
+.feedback .msg{flex:1}
+.feedback .btn{min-height:52px}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pad button{background:#fff;border-radius:20px;box-shadow:var(--shadow);font-size:1.9em;font-weight:900;min-height:76px}
+.pad button:active{transform:translateY(3px)}
+.pad .ok{background:var(--ok);color:#fff;font-size:1.3em}
+.pad .del{background:#ffe8cc;font-size:1.3em}
+@media (orientation:landscape) and (min-width:900px){
+  .qwrap{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:start}
+  .qcard{min-height:330px}
+  .pad button{min-height:70px}
+}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.float-star{position:fixed;font-size:3.2em;pointer-events:none;z-index:50;animation:fly 1s ease-out forwards}
+@keyframes fly{0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}25%{opacity:1;transform:translate(-50%,-80%) scale(1.3)}100%{opacity:0;transform:translate(-50%,-220%) scale(1)}}
+.explain{margin-top:6px;font-size:1.05em;color:#495057}
+.explain b{color:var(--ink)}
+/* summary */
+.sum{background:#fff;border-radius:30px;box-shadow:var(--shadow);padding:30px;text-align:center}
+.sum .big{font-size:4em}
+.sum .stats{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:16px 0}
+.sum .st{background:var(--bg);border-radius:20px;padding:14px 24px;min-width:150px}
+.sum .st b{display:block;font-size:2em}
+.confetti{position:fixed;top:-40px;font-size:2em;pointer-events:none;z-index:40;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+/* browse */
+.grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.zc{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:10px 6px;text-align:center}
+.zc .p{font-size:.95em;color:#e8590c;font-weight:700}
+.zc .z{font-size:2.6em;line-height:1.2}
+.zc .w{font-size:.8em;color:var(--muted)}
+.pyc{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:10px 4px;text-align:center}
+.pyc .p{font-size:1.7em;font-weight:900}
+.pyc .w{font-size:.75em;color:var(--muted)}
+.grid-py{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.kj{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.kj button{background:#fff;border-radius:12px;box-shadow:0 3px 0 rgba(0,0,0,.08);padding:6px 2px;min-height:62px;line-height:1.25}
+.kj button .a{font-size:min(2.15vw,21px);font-weight:900;white-space:nowrap}
+.kj button .b{font-size:.7em;color:var(--muted)}
+.kj .empty{visibility:hidden}
+.kj button.hl{background:#fff3bf}
+/* stickers */
+.stk{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
+.stk .s{background:#fff;border-radius:22px;box-shadow:var(--shadow);text-align:center;padding:14px 6px}
+.stk .s .e{font-size:3em}
+.stk .s.lock .e{filter:grayscale(1);opacity:.25}
+.stk .s small{display:block;color:var(--muted);font-size:.75em}
+/* parent */
+.panel{background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:18px 20px;margin-bottom:16px}
+table{width:100%;border-collapse:collapse;font-size:.9em}
+td,th{padding:8px 6px;border-bottom:1px solid #eee;text-align:left}
+.overlay{position:fixed;inset:0;background:rgba(43,45,66,.55);display:flex;align-items:center;justify-content:center;z-index:60;padding:20px}
+.dialog{background:#fff;border-radius:30px;padding:26px;max-width:560px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.dialog h2{margin:4px 0 10px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#2b2d42;color:#fff;padding:12px 22px;border-radius:16px;z-index:70;font-size:.9em;max-width:90%}
+.note{color:var(--muted);font-size:.8em}
+@media (orientation:portrait) and (min-width:641px){.ch{min-height:150px}.qcard{min-height:300px}.pad button{min-height:96px}}
+@media (max-width:640px){.subjects,.menu{grid-template-columns:1fr}.subj{min-height:180px}.qbig{font-size:4em}.kj{grid-template-columns:repeat(4,1fr)}}
+@media (orientation:landscape) and (max-height:800px){.subj{min-height:220px}.hero{margin:0 0 10px}.qbig{font-size:4.6em}}
+/* ===== v2 ===== */
+.center{text-align:center}.m0{margin-top:0}.mt{margin-top:12px}.s24{font-size:2.4em!important}.big1{font-size:1.4em}.big2{font-size:1.2em}
+.opts-line.cc{justify-content:center;margin:12px 0}
+.btn.big{font-size:1.25em;padding:16px 40px;min-height:68px;margin-top:6px}
+.btn.small-btn{min-height:44px;padding:8px 16px;font-size:.85em;margin-top:8px}
+.ulist{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.uc{background:#fff;border-radius:24px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center;text-align:left;padding:14px 16px;min-height:118px}
+.uc .uno{flex:none;width:58px;height:58px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:1.6em;font-weight:900;color:#fff}
+.yw .uc .uno{background:var(--yw)}.sx .uc .uno{background:var(--sx)}
+.uc.exam{background:#fff9db;border:3px dashed var(--star)}.uc.exam .uno{background:var(--star)!important;color:#3d2c00}
+.uc .ub{flex:1;min-width:0}.uc .ub b{display:block;font-size:1.05em}.uc .ub small{display:block;color:var(--muted);font-size:.75em;line-height:1.35;margin-top:2px}
+.ubar{height:8px;background:#f1f3f5;border-radius:6px;overflow:hidden;margin:8px 0 6px}.ubar i{display:block;height:100%;background:var(--ok);border-radius:6px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}.tag{font-size:.68em;font-weight:800;border-radius:10px;padding:3px 9px}
+.tag.good{background:var(--ok2);color:#137a45}.tag.mid{background:#e7f5ff;color:#1864ab}.tag.low{background:var(--bad2);color:#b45309}.tag.gray{background:#f1f3f5;color:#868e96}
+.lessons{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px}.lessons span{background:#fff;border-radius:12px;padding:5px 12px;font-size:.78em;box-shadow:0 2px 0 rgba(0,0,0,.06)}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:#fff;border-radius:20px;padding:6px;box-shadow:var(--shadow);margin-bottom:16px;position:sticky;top:0;z-index:5}
+.tabs button{background:transparent;border-radius:14px;min-height:56px;font-weight:900;font-size:1em}
+.tabs button.on{background:var(--star);color:#3d2c00}
+.kcard{background:#fff;border-radius:22px;box-shadow:var(--shadow);padding:16px 20px;margin-bottom:14px;position:relative}
+.kcard h3{margin:0 64px 8px 0;font-size:1.1em}.kcard p{margin:0;line-height:1.75;padding-right:8px}
+.spk2{position:absolute;top:12px;right:12px;width:52px;height:52px;border-radius:50%;background:var(--star);font-size:1.3em}
+.kcard.pt{border-left:8px solid var(--star)}.kcard .ex{margin-top:10px;background:var(--bg);border-radius:14px;padding:10px 14px}
+.exa{margin-top:8px;color:#137a45;font-size:1.05em}
+.qtext{font-size:1.65em;font-weight:800;line-height:1.5;padding:0 40px}
+.wp{font-size:1.35em;font-weight:700;line-height:1.6;text-align:left;padding:0 50px 0 6px}
+.qeq.small{font-size:2.2em}
+.vwrap{display:flex;align-items:center;gap:24px;justify-content:center}
+.vt{border-collapse:collapse;font-size:2.6em;font-weight:900;font-family:"Arial Rounded MT Bold",Arial,sans-serif}.vt td{width:1.1em;text-align:center;padding:0 2px;border:0;line-height:1.15}
+.vt tr.line td{border-top:5px solid var(--ink);height:6px}
+.groups{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:6px 0}.grp{border:3px dashed #adb5bd;border-radius:16px;padding:6px 10px;font-size:1.8em;letter-spacing:2px}
+.ruler{width:100%;max-width:560px;height:auto}.grid8{width:100%;max-width:520px;height:auto}
+.choices.c1{grid-template-columns:1fr}.choices.c3{grid-template-columns:1fr 1fr 1fr}
+.ch.picked{border-color:var(--sx);background:var(--sx2)}
+.retry-tag.blue{background:#e7f5ff;color:#1864ab}
+.rv{border-top:1px solid #eee;padding:12px 2px}.rvq{font-weight:700}.rva{margin:4px 0;font-size:.92em}.rve{font-size:.85em;color:#495057}
+span.bad{color:#d9480f;font-weight:800}span.good{color:#137a45;font-weight:800}
+.tscroll{overflow-x:auto}
+.sum .st.score b{font-size:3em;color:var(--yw)}
+.kj{grid-template-columns:repeat(9,1fr)!important}
+.kj button .a{font-size:min(1.9vw,19px)!important}
+@media (max-width:640px){.ulist{grid-template-columns:1fr}.tabs button{font-size:.85em}}
+@media (orientation:portrait) and (min-width:641px){.ulist{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+(function(){
+"use strict";
+/* ================= 工具 ================= */
+const $=s=>document.querySelector(s);
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const strip=s=>String(s).replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+const CN="零一二三四五六七八九";
+function kj(a,b){const x=Math.min(a,b),y=Math.max(a,b),p=x*y;let s;
+  if(p<10)s="得"+CN[p];else{const t=Math.floor(p/10),u=p%10;s=(t===1?(u?"十":"一十"):CN[t]+"十")+(u?CN[u]:"");}
+  return CN[x]+CN[y]+s;}
+const TONES={a:"āáǎà",o:"ōóǒò",e:"ēéěè",i:"īíǐì",u:"ūúǔù","ü":"ǖǘǚǜ"};
+function mark(base,t){if(!t)return base;let idx=-1;
+  if(base.indexOf("a")>=0)idx=base.indexOf("a");else if(base.indexOf("e")>=0)idx=base.indexOf("e");else if(base.indexOf("ou")>=0)idx=base.indexOf("o");
+  else{for(let k=base.length-1;k>=0;k--){if("aoeiuü".indexOf(base[k])>=0){idx=k;break;}}}
+  if(idx<0)return base;return base.slice(0,idx)+TONES[base[idx]][t-1]+base.slice(idx+1);}
+function parsePy(py){let t=0,b="";for(const ch of py){let f=false;for(const v in TONES){const k=TONES[v].indexOf(ch);if(k>=0){t=k+1;b+=v;f=true;break;}}if(!f)b+=ch;}return {b,t};}
+function zhSay(s){return strip(s).replace(/×/g,"乘").replace(/÷/g,"除以").replace(/[＝=]/g,"等于").replace(/[＋+]/g,"加").replace(/[－−]/g,"减").replace(/～|~/g,"到").replace(/（\s*）|（　+）|\(\s*\)/g,"几").replace(/_{2,}/g,"什么").replace(/\bcm\b/g,"厘米").replace(/○/g,"圈");}
+
+/* ================= 存储 ================= */
+const KEY="xxx-learn-v1";let mem=null;
+function sGet(){try{return localStorage.getItem(KEY);}catch(e){return mem;}}
+function sSet(v){try{localStorage.setItem(KEY,v);}catch(e){mem=v;}}
+function blank(){return {v:2,stars:0,subj:{yuwen:{rounds:0,ans:0,ok:0},shuxue:{rounds:0,ans:0,ok:0}},units:{},tests:{},modes:{},wrong:[],settings:{limit:20,qn:10,auto:true,rate:0.85,mulRange:"2-9",timed:false},log:[]};}
+let D;try{D=JSON.parse(sGet()||"null");}catch(e){D=null;}
+if(!D||!D.subj)D=blank();
+(function(){const b=blank();for(const k in b)if(D[k]===undefined)D[k]=b[k];for(const s in b.settings)if(D.settings[s]===undefined)D.settings[s]=b.settings[s];
+  // 旧版错题（按题型规格保存）不兼容新结构，清理
+  D.wrong=(D.wrong||[]).filter(w=>w&&w.q);D.v=2;})();
+function save(){sSet(JSON.stringify(D));}
+function U(id){return D.units[id]||(D.units[id]={ans:0,ok:0,rounds:0,k:0,p:0});}
+
+/* ================= 声音 ================= */
+const synth=("speechSynthesis" in window)?window.speechSynthesis:null;let voices=[];
+function loadVoices(){if(synth){try{voices=synth.getVoices()||[];}catch(e){voices=[];}}}
+if(synth){loadVoices();try{synth.onvoiceschanged=loadVoices;}catch(e){}}
+function voiceFor(lang){const l=lang.toLowerCase(),pre=l.split("-")[0];let v=voices.filter(x=>x.lang&&x.lang.toLowerCase().replace("_","-")===l);if(!v.length)v=voices.filter(x=>x.lang&&x.lang.toLowerCase().indexOf(pre)===0);return v[0]||null;}
+function speak(text,lang){if(!synth){toast("这台设备暂不支持朗读，请看文字哦");return;}if(!text)return;
+  try{synth.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang||"zh-CN";const v=voiceFor(u.lang);if(v)u.voice=v;u.rate=D.settings.rate||0.85;u.pitch=1.05;synth.speak(u);}catch(e){}}
+let actx=null;
+function ac(){if(!actx){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;try{actx=new C();}catch(e){return null;}}if(actx.state==="suspended"){try{actx.resume();}catch(e){}}return actx;}
+function tone(f,st,du,ty,vo){const c=ac();if(!c)return;const o=c.createOscillator(),g=c.createGain();o.type=ty||"sine";o.frequency.value=f;const t0=c.currentTime+st;g.gain.setValueAtTime(0.0001,t0);g.gain.exponentialRampToValueAtTime(vo||0.25,t0+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t0+du);o.connect(g);g.connect(c.destination);o.start(t0);o.stop(t0+du+0.05);}
+const SFX={ok(){tone(660,0,.15,"triangle");tone(880,.12,.15,"triangle");tone(1320,.24,.25,"triangle",.18);},bad(){tone(330,0,.18,"sine",.2);tone(262,.16,.28,"sine",.18);},
+  win(){[523,659,784,1047,784,1047].forEach((f,i)=>tone(f,i*.12,.2,"triangle",.2));},tap(){tone(520,0,.06,"sine",.12);},pick(){tone(600,0,.08,"sine",.15);}};
+
+/* ================= 题目构造 ================= */
+function chQ(o){ // o: tip,prompt,opts(array, 第一个为正确答案),cls,say,sayAfter,explain,label,key,keep,cols
+  const ans=o.opts[0];const opts=o.keep?o.opts:shuffle(o.opts);
+  return {kind:"choice",tip:o.tip,prompt:o.prompt,say:o.say||null,sayAfter:o.sayAfter||null,cols:o.cols,
+    options:opts.map(v=>({label:v,v:v,cls:o.cls||"small"})),ans:ans,ansText:ans,explain:o.explain||"",label:o.label||(strip(o.tip+" "+o.prompt)),key:o.key};}
+function numQ(o){ // o: tip,prompt(html，含 #ansbox),ans,say,explain,label,key
+  return {kind:"num",tip:o.tip||"算一算，用数字键输入答案",prompt:o.prompt,say:o.say||null,sayAfter:o.sayAfter||null,ans:String(o.ans),ansText:String(o.ans)+(o.unit||""),explain:o.explain||"",label:o.label||strip(o.prompt).replace("?","（　）"),key:o.key};}
+const AB='<span class="ans" id="ansbox">?</span>';
+function eqQ(expr,ans,explain,key,extra){ // 算式题
+  const e=expr.replace(/\*/g,"×").replace(/\//g,"÷").replace(/-/g,"−");
+  return numQ(Object.assign({prompt:'<div class="qeq">'+e+' = '+AB+'</div>',ans:ans,say:[zhSay(e)+"等于几？","zh-CN"],explain:explain||(e+" = <b>"+ans+"</b>"),key:key||("e:"+expr),label:e+" = （　）"},extra||{}));}
+function wordQ(text,ans,unit,explain,key){ // 应用题
+  return numQ({tip:"读一读，算一算",prompt:'<div class="wp">'+text+'</div><div class="qeq small">答：'+AB+' '+(unit||"")+'</div>',ans:ans,unit:unit,say:[zhSay(text),"zh-CN"],explain:explain,key:key||("w:"+text),label:text});}
+
+/* 语文 · 统编版（人教社）二年级上册（2025年秋季修订版）
+   单元目录与课文据人教社《基于精准解析二年级统编小学语文教科书编排的教学策略研究》、语文探源(hantang.github.io/yuwen)整理；
+   生字据公开同步写字课目录整理，拼音与组词为本应用编写，请以孩子课本为准。 */
+var YW_UNITS=[
+{id:"yw1",no:1,name:"第一单元",type:"阅读",
+ lessons:["1 小蝌蚪找妈妈","2 我是什么","3 植物妈妈有办法","语文园地一","快乐读书吧：读读童话故事"],
+ zi:"两,liǎng,两条;条,tiáo,面条;哪,nǎ,哪里;宽,kuān,宽阔;那,nà,那边;短,duǎn,长短;孩,hái,孩子;成,chéng,成长;知,zhī,知道;数,shù,无数;连,lián,连忙;低,dī,高低;海,hǎi,大海;洋,yáng,海洋;许,xǔ,许多;作,zuò,工作;灾,zāi,灾害;办,bàn,办法;法,fǎ,方法;如,rú,如果;已,yǐ,已经;经,jīng,经过;别,bié,告别;娃,wá,娃娃;轻,qīng,轻快;发,fā,出发;肚,dù,肚皮;更,gèng,更加;识,shí,知识;塘,táng,池塘;脑,nǎo,脑袋;灰,huī,灰色;腿,tuǐ,后腿;迎,yíng,欢迎;嘴,zuǐ,嘴巴;龟,guī,乌龟;蹲,dūn,蹲下;鼓,gǔ,鼓起;教,jiāo,教书",
+ know:[
+  ["小蝌蚪找妈妈","小蝌蚪先长出两条后腿，再长出两条前腿，接着尾巴变短，最后尾巴不见了，变成了小青蛙。它们先问了鲤鱼妈妈，又追上乌龟，最后找到了青蛙妈妈。"],
+  ["我是什么","课文里的“我”是水。太阳一晒，水变成汽，升到天空变成云；云里的小水滴落下来是雨，有时变成冰雹，冬天变成雪。水能灌溉田地、发动机器，也会淹没庄稼、冲毁房屋。"],
+  ["植物妈妈有办法","植物妈妈送孩子去旅行：蒲公英靠风，苍耳挂在动物的皮毛上，石榴靠小鸟，豌豆的豆荚在太阳下晒得炸开。"],
+  ["语文园地一·日积月累","古诗《梅花》［宋］王安石：墙角数枝梅，凌寒独自开。遥知不是雪，为有暗香来。"],
+  ["多音字","“教”在“教小鲤鱼捕食”里读 jiāo。“数”在“无数”里读 shù，在“数星星”里读 shǔ。"]],
+ points:[
+  ["小蝌蚪变青蛙的顺序","常考排序题，先后顺序要记牢。","把顺序排一排：①尾巴变短 ②长出后腿 ③长出前腿 ④尾巴不见了","②→③→①→④"],
+  ["“哪”和“那”","问问题用“哪”（哪里、哪儿），指地方用“那”（那边、那里）。","（哪/那）里有我们的妈妈？","哪"],
+  ["植物传播种子的办法","植物和办法要配对。","苍耳靠什么去旅行？","挂住动物的皮毛"],
+  ["古诗默写《梅花》","作者王安石，宋代。","遥知不是雪，________。","为有暗香来"]],
+ bank:[
+  "小蝌蚪最先长出了什么？|两条后腿|两条前腿|尾巴变短|一对大眼睛|课文：过了几天，长出了两条后腿。",
+  "小蝌蚪最先问路的是谁？|鲤鱼妈妈|乌龟|青蛙妈妈|小鸟|先问鲤鱼阿姨，再追乌龟，最后找到青蛙妈妈。",
+  "小蝌蚪的尾巴变短以后，游到哪里看见了青蛙？|荷花旁边|大海里|井里|小溪边|他们游到荷花旁边，看见荷叶上蹲着一只大青蛙。",
+  "青蛙长大以后天天去做什么？|捉害虫|找妈妈|晒太阳|唱歌|他们跟着妈妈，天天去捉害虫。",
+  "《我是什么》里的“我”是什么？|水|云|风|太阳|水会变成汽、云、雨、冰雹和雪。",
+  "到了冬天，“我”变成小花朵飘下来，人们叫我什么？|雪|雨|冰雹|云|到了冬天，我变成小花朵飘下来，人们又叫我“雪”。",
+  "蒲公英妈妈靠什么送孩子去旅行？|风|小鸟|太阳|动物的皮毛|只要有风轻轻吹过，孩子们就乘着风纷纷出发。",
+  "苍耳妈妈给孩子穿上了什么？|带刺的铠甲|降落伞|豆荚|翅膀|苍耳挂住动物的皮毛，就能去田野、山洼。",
+  "豌豆妈妈的办法是什么？|让豆荚晒在太阳底下炸开|准备降落伞|让小鸟吃掉|挂在动物身上|啪的一声，豆荚炸开，孩子们就蹦着跳着离开妈妈。",
+  "墙角数枝梅，（　　）。|凌寒独自开|为有暗香来|遥知不是雪|疑是地上霜|王安石《梅花》",
+  "遥知不是雪，（　　）。|为有暗香来|凌寒独自开|墙角数枝梅|更上一层楼|王安石《梅花》",
+  "《梅花》的作者是谁？|王安石|李白|王之涣|柳宗元|宋代诗人王安石。",
+  "选字填空：（　）里有我们的妈妈？|哪|那|问问题时用“哪”。",
+  "“教小鲤鱼捕食”的“教”读什么？|jiāo|jiào|“教”是多音字，这里读 jiāo。"]},
+{id:"yw2",no:2,name:"第二单元",type:"识字",
+ lessons:["识字1 场景歌","识字2 树之歌","识字3 拍手歌","识字4 田家四季歌","语文园地二"],
+ zi:"帆,fān,帆船;稻,dào,稻田;园,yuán,花园;溪,xī,小溪;丛,cóng,草丛;翠,cuì,翠绿;铜,tóng,铜号;群,qún,一群;块,kuài,一块;座,zuò,一座;队,duì,队旗;号,hào,号码;杨,yáng,杨树;壮,zhuàng,强壮;桐,tóng,梧桐;枫,fēng,枫叶;松,sōng,松树;柏,bǎi,松柏;杉,shān,水杉;桂,guì,桂花;化,huà,变化;世,shì,世界;界,jiè,边界;孔,kǒng,孔雀;雀,què,麻雀;雄,xióng,雄鹰;鹰,yīng,老鹰;雁,yàn,大雁;猛,měng,猛虎;灵,líng,百灵;朋,péng,朋友;友,yǒu,友好;保,bǎo,保护;护,hù,爱护;季,jì,四季;蝴,hú,蝴蝶;蝶,dié,彩蝶;麦,mài,麦苗;嫩,nèn,嫩绿;肥,féi,肥大;农,nóng,农民;归,guī,归来;戴,dài,戴帽;谷,gǔ,稻谷;辛,xīn,辛苦;苦,kǔ,苦瓜;事,shì,农事",
+ know:[
+  ["场景歌（学量词）","一只海鸥，一片沙滩，一艘军舰，一条帆船；一方鱼塘，一块稻田，一行垂柳，一座花园；一道小溪，一孔石桥，一丛翠竹，一群飞鸟；一面队旗，一把铜号，一队“红领巾”，一片欢笑。"],
+  ["树之歌（认识树）","杨树高，榕树壮，梧桐树叶像手掌。枫树秋天叶儿红，松柏四季披绿装。木棉喜暖在南方，桦树耐寒守北疆。银杏水杉活化石，金桂开花满院香。木字旁的字大多和树木有关。"],
+  ["拍手歌（认识动物）","孔雀、锦鸡、雄鹰、大雁、猛虎、黄鹂、百灵、熊猫……人和动物是朋友，保护动物是大事。"],
+  ["田家四季歌","春季：花开草长蝴蝶飞。夏季：采了蚕桑又插秧。秋季：谷像黄金粒粒香。冬季：新制棉衣暖又轻。"],
+  ["语文园地二","识字加油站（反义词）：美对丑，爱对恨，真诚对虚假，热忱对冷漠，贫对富，冷对暖，饥寒对温饱，索取对奉献。日积月累：《数九歌》。"]],
+ points:[
+  ["量词搭配","量词要和事物配对，常考填空。","一（　）军舰，一（　）石桥","艘；孔"],
+  ["树的特点","记住每种树的特点。","哪种树“耐寒守北疆”？","桦树"],
+  ["反义词","语文园地二的反义词要会对。","真诚—（　　）","虚假"],
+  ["四季农事","根据诗句判断季节。","“采了蚕桑又插秧”是哪个季节？","夏季"]],
+ bank:[
+  "一（　）海鸥|只|张|本|件|场景歌：一只海鸥",
+  "一（　）沙滩|片|只|本|头|场景歌：一片沙滩",
+  "一（　）军舰|艘|本|张|颗|场景歌：一艘军舰",
+  "一（　）帆船|条|本|件|颗|场景歌：一条帆船",
+  "一（　）鱼塘|方|本|只|件|场景歌：一方鱼塘",
+  "一（　）稻田|块|只|本|头|场景歌：一块稻田",
+  "一（　）垂柳|行|本|头|件|场景歌：一行垂柳",
+  "一（　）花园|座|只|本|张|场景歌：一座花园",
+  "一（　）小溪|道|本|只|件|场景歌：一道小溪",
+  "一（　）石桥|孔|本|只|张|场景歌：一孔石桥",
+  "一（　）翠竹|丛|头|本|件|场景歌：一丛翠竹",
+  "一（　）飞鸟|群|本|张|件|场景歌：一群飞鸟",
+  "一（　）队旗|面|头|本|颗|场景歌：一面队旗",
+  "一（　）铜号|把|头|颗|张|场景歌：一把铜号",
+  "哪种树的叶子像手掌？|梧桐|杨树|松柏|桦树|梧桐树叶像手掌。",
+  "哪种树秋天叶儿红？|枫树|松柏|榕树|木棉|枫树秋天叶儿红。",
+  "哪种树四季披绿装？|松柏|枫树|梧桐|木棉|松柏四季披绿装。",
+  "哪种树耐寒守北疆？|桦树|木棉|榕树|金桂|桦树耐寒守北疆。",
+  "被叫作“活化石”的是哪两种树？|银杏和水杉|杨树和榕树|枫树和梧桐|金桂和木棉|银杏水杉活化石。",
+  "你拍三，我拍三，（　　）飞翔云彩间。|雄鹰|孔雀|熊猫|猛虎|拍手歌",
+  "天空（　　）会写字。|雁群|雄鹰|孔雀|黄鹂|拍手歌：天空雁群会写字。",
+  "丛林深处有（　　）。|猛虎|熊猫|锦鸡|百灵|拍手歌",
+  "竹林（　　）在嬉戏。|熊猫|猛虎|雄鹰|大雁|拍手歌",
+  "“采了蚕桑又插秧”说的是哪个季节？|夏季|春季|秋季|冬季|田家四季歌：夏季里，农事忙。",
+  "“谷像黄金粒粒香”说的是哪个季节？|秋季|春季|夏季|冬季|田家四季歌：秋季里，稻上场。",
+  "“新制棉衣暖又轻”说的是哪个季节？|冬季|春季|夏季|秋季|田家四季歌：冬季里，雪初晴。",
+  "“花开草长蝴蝶飞”说的是哪个季节？|春季|夏季|秋季|冬季|田家四季歌：春季里，春风吹。",
+  "“美”的反义词是什么？|丑|好|爱|富|识字加油站：美对丑。",
+  "“爱”的反义词是什么？|恨|丑|冷|贫|识字加油站：爱对恨。",
+  "“真诚”的反义词是什么？|虚假|冷漠|奉献|温饱|识字加油站：真诚对虚假。",
+  "“热忱”的反义词是什么？|冷漠|虚假|贫穷|温饱|识字加油站：热忱对冷漠。",
+  "“贫”的反义词是什么？|富|冷|丑|恨|识字加油站：贫对富。",
+  "“饥寒”的反义词是什么？|温饱|奉献|虚假|冷漠|识字加油站：饥寒对温饱。",
+  "“索取”的反义词是什么？|奉献|温饱|真诚|热忱|识字加油站：索取对奉献。",
+  "一九二九（　　），三九四九冰上走。|不出手|沿河看柳|八九雁来|耕牛遍地走|《数九歌》",
+  "七九河开，（　　）。|八九雁来|沿河看柳|冰上走|不出手|《数九歌》",
+  "九九加一九，（　　）。|耕牛遍地走|八九雁来|冰上走|沿河看柳|《数九歌》"]},
+{id:"yw3",no:3,name:"第三单元",type:"阅读",
+ lessons:["4 彩虹","5 去外婆家","6 数星星的孩子","语文园地三"],
+ zi:"虹,hóng,彩虹;浇,jiāo,浇花;壶,hú,水壶;提,tí,提水;洒,sǎ,洒水;挑,tiāo,挑水;镜,jìng,镜子;拿,ná,拿着;系,jì,系鞋带;荡,dàng,荡秋千;裙,qún,裙子;丽,lì,美丽;圆,yuán,圆形;哥,gē,哥哥;秋,qiū,秋千;婆,pó,外婆;舅,jiù,舅舅;趣,qù,有趣;留,liú,留下;份,fèn,一份;喂,wèi,喂食;逃,táo,逃跑;曲,qǔ,歌曲;扑,pū,扑鼻;鼻,bí,鼻子;宝,bǎo,宝贝;总,zǒng,总是;给,gěi,送给;诉,sù,告诉;珍,zhēn,珍珠;撒,sǎ,撒满;碧,bì,碧绿;靠,kào,靠近;仰,yǎng,仰头;颗,kē,一颗;距,jù,距离;祖,zǔ,祖先;勺,sháo,勺子;楚,chǔ,清楚;汉,hàn,汉朝;刻,kè,刻苦;研,yán,研究;晚,wǎn,晚上;奶,nǎi,奶奶;您,nín,您好;爷,yé,爷爷;张,zhāng,张开",
+ know:[
+  ["彩虹","雨停了，天上有一座美丽的桥。孩子想：提着爸爸的水壶在桥上洒水，就是“我”在下雨；拿着妈妈的镜子，天上就多了一个月亮；把哥哥的秋千挂在彩虹桥上，花裙子飘啊飘，就成了一朵彩云。孩子想让家人高兴。"],
+  ["去外婆家","外婆的家在山脚下，山上山下宝贝多。舅舅会带回山楂、柿子或毛粟子；“我”最喜欢林间的小山雀；春天山上开满杜鹃花。外婆家真有趣！"],
+  ["数星星的孩子","孩子叫张衡，是汉朝人。爷爷告诉他：七颗星连起来像一把勺子，叫北斗七星；勺口对着的是北极星。张衡刻苦钻研天文，后来成了著名的天文学家。"],
+  ["语文园地三·日积月累","古诗《小儿垂钓》［唐］胡令能：蓬头稚子学垂纶，侧坐莓苔草映身。路人借问遥招手，怕得鱼惊不应人。"],
+  ["多音字","数：数星星 shǔ，无数 shù。系：系在树上 jì。撒：撒在碧玉盘里 sǎ。"]],
+ points:[
+  ["多音字“数”","动作“数一数”读 shǔ，表示数量“无数”读 shù。","“数星星”的“数”读（　　）","shǔ"],
+  ["人物和朝代","张衡是汉朝人，天文学家。","数星星的孩子名叫（　　），是（　　）朝人。","张衡；汉"],
+  ["北斗七星","七颗星像一把勺子，勺口对着北极星。","勺口对着的那颗星叫什么？","北极星"],
+  ["古诗默写《小儿垂钓》","作者胡令能，唐代。","路人借问遥招手，________。","怕得鱼惊不应人"]],
+ bank:[
+  "雨停了，天上有一座美丽的（　　）。|桥|船|山|楼|课文把彩虹比作一座桥。",
+  "孩子想提着谁的水壶走到桥上洒水？|爸爸|妈妈|哥哥|奶奶|爸爸，你那把浇花用的水壶呢？",
+  "拿着妈妈的镜子走到桥上，天上就多了一个什么？|月亮|太阳|星星|彩云|天上不就多了一个月亮吗？",
+  "把秋千挂在彩虹桥上，花裙子飘啊飘，就成了一朵什么？|彩云|雪花|月亮|小花|不就成了一朵彩云吗？",
+  "外婆的家在哪里？|山脚下|海边|城市里|草原上|外婆的家在山脚下。",
+  "“我”最喜欢的宝贝是什么？|小山雀|山楂|杜鹃花|柿子|它们是我最喜欢的宝贝。",
+  "春天，外婆家屋后的山上开满了什么花？|杜鹃花|桃花|菊花|梅花|开满了姹紫嫣红的杜鹃花。",
+  "满天的星星像无数（　　）撒在碧玉盘里。|珍珠|宝石|花瓣|雪花|数星星的孩子",
+  "数星星的孩子名叫什么？|张衡|祖冲之|李白|王安石|这个数星星的孩子名叫张衡。",
+  "张衡是哪个朝代的人？|汉朝|唐朝|宋朝|清朝|张衡是汉朝人。",
+  "七颗星连起来像一把勺子，叫什么？|北斗七星|北极星|牛郎星|织女星|那七颗星连起来像一把勺子，叫北斗七星。",
+  "张衡后来成了著名的什么？|天文学家|诗人|画家|医生|他刻苦钻研天文，后来成了著名的天文学家。",
+  "蓬头稚子学垂纶，（　　）。|侧坐莓苔草映身|路人借问遥招手|怕得鱼惊不应人|凌寒独自开|胡令能《小儿垂钓》",
+  "路人借问遥招手，（　　）。|怕得鱼惊不应人|侧坐莓苔草映身|蓬头稚子学垂纶|为有暗香来|胡令能《小儿垂钓》",
+  "《小儿垂钓》的作者是谁？|胡令能|李白|王安石|柳宗元|唐代诗人胡令能。",
+  "“数星星”的“数”读什么？|shǔ|shù|动作数一数读 shǔ。",
+  "“无数”的“数”读什么？|shù|shǔ|表示数量读 shù。",
+  "“系在门前树上”的“系”读什么？|jì|xì|表示打结、拴住，读 jì。"]},
+{id:"yw4",no:4,name:"第四单元",type:"阅读",
+ lessons:["7 古诗二首：登鹳雀楼、望庐山瀑布","8 黄山奇石","9 日月潭","10 葡萄沟","语文园地四"],
+ zi:"依,yī,依靠;尽,jìn,尽头;层,céng,一层;照,zhào,照亮;炉,lú,香炉;烟,yān,紫烟;川,chuān,山川;直,zhí,直线;闻,wén,闻名;景,jǐng,风景;区,qū,景区;省,shěng,节省;秀,xiù,秀丽;仙,xiān,神仙;巨,jù,巨大;伸,shēn,伸手;顶,dǐng,山顶;位,wèi,位置;狗,gǒu,小狗;形,xíng,图形;状,zhuàng,形状;岩,yán,岩石;潭,tán,水潭;茂,mào,茂盛;盛,shèng,盛开;岛,dǎo,小岛;映,yìng,倒映;整,zhěng,整齐;童,tóng,童话;吸,xī,吸引;客,kè,客人;湖,hú,湖水;弯,wān,弯曲;现,xiàn,出现;就,jiù,就是;外,wài,外面;沟,gōu,山沟;坡,pō,山坡;密,mì,茂密;枝,zhī,树枝;淡,dàn,淡绿;族,zú,民族;够,gòu,足够;收,shōu,收获;市,shì,城市;干,gān,葡萄干;颜,yán,颜色;味,wèi,味道;城,chéng,长城",
+ know:[
+  ["登鹳雀楼［唐］王之涣","白日依山尽，黄河入海流。欲穷千里目，更上一层楼。后两句告诉我们：站得高，才能看得远。"],
+  ["望庐山瀑布［唐］李白","日照香炉生紫烟，遥看瀑布挂前川。飞流直下三千尺，疑是银河落九天。"],
+  ["黄山奇石","黄山在安徽省南部，怪石有趣极了：仙桃石、猴子观海、仙人指路、金鸡叫天都，还有天狗望月、狮子抢球、仙女弹琴。"],
+  ["日月潭","日月潭是我国台湾省最大的湖。湖中央的小岛把湖水分成两半：北边像圆圆的太阳，叫日潭；南边像弯弯的月亮，叫月潭。"],
+  ["葡萄沟","葡萄沟在新疆吐鲁番。七月葡萄成熟，有红的、白的、紫的、淡绿的。晾房里的葡萄能制成葡萄干。"],
+  ["语文园地四·日积月累","有山皆图画，无水不文章。白马西风塞上，杏花烟雨江南。清风明月本无价，近水遥山皆有情。雾锁山头山锁雾，天连水尾水连天。"]],
+ points:[
+  ["古诗默写和作者","《登鹳雀楼》王之涣，《望庐山瀑布》李白。","欲穷千里目，________。","更上一层楼"],
+  ["地名配对","黄山—安徽省，日月潭—台湾省，葡萄沟—新疆吐鲁番。","葡萄沟在哪里？","新疆吐鲁番"],
+  ["日潭和月潭","北边像太阳叫日潭，南边像月亮叫月潭。","日月潭南边像什么？","弯弯的月亮"],
+  ["奇石的名字","根据样子说出奇石的名字。","像仙人伸着手臂指向前方的石头叫什么？","仙人指路"]],
+ bank:[
+  "白日依山尽，（　　）。|黄河入海流|欲穷千里目|更上一层楼|飞流直下三千尺|王之涣《登鹳雀楼》",
+  "欲穷千里目，（　　）。|更上一层楼|黄河入海流|白日依山尽|疑是银河落九天|王之涣《登鹳雀楼》",
+  "《登鹳雀楼》的作者是谁？|王之涣|李白|柳宗元|王安石|唐代诗人王之涣。",
+  "日照香炉生紫烟，（　　）。|遥看瀑布挂前川|飞流直下三千尺|疑是银河落九天|黄河入海流|李白《望庐山瀑布》",
+  "飞流直下三千尺，（　　）。|疑是银河落九天|遥看瀑布挂前川|日照香炉生紫烟|更上一层楼|李白《望庐山瀑布》",
+  "《望庐山瀑布》的作者是谁？|李白|王之涣|胡令能|王安石|唐代诗人李白。",
+  "黄山在我国哪个省？|安徽省|台湾省|新疆|山东省|黄山风景区在我国安徽省南部。",
+  "像从天上飞下来的大桃子的石头叫什么？|仙桃石|猴子观海|仙人指路|金鸡叫天都|它好像从天上飞下来的一个大桃子。",
+  "蹲在山头望着翻滚云海的石头叫什么？|猴子观海|仙桃石|仙人指路|天狗望月|这就是有趣的“猴子观海”。",
+  "对着天都峰不住啼叫的是什么石头？|金鸡叫天都|仙人指路|狮子抢球|猴子观海|著名的“金鸡叫天都”。",
+  "日月潭在哪里？|台湾省|安徽省|新疆|北京|日月潭是我国台湾省最大的一个湖。",
+  "日月潭北边像圆圆的太阳，叫什么？|日潭|月潭|北潭|圆潭|北边像圆圆的太阳，叫日潭。",
+  "葡萄沟在哪里？|新疆吐鲁番|台湾省|安徽省|海南岛|新疆吐鲁番有个地方叫葡萄沟。",
+  "葡萄沟的葡萄几月成熟？|七月|五月|六月|十月|到了七月份，人们最喜爱的葡萄成熟了。",
+  "晾房里的葡萄会被制成什么？|葡萄干|葡萄汁|果酱|罐头|运到晾房里制成葡萄干。",
+  "有山皆图画，（　　）。|无水不文章|杏花烟雨江南|近水遥山皆有情|天连水尾水连天|语文园地四·日积月累",
+  "清风明月本无价，（　　）。|近水遥山皆有情|无水不文章|杏花烟雨江南|雾锁山头山锁雾|语文园地四·日积月累"]},
+{id:"yw5",no:5,name:"第五单元",type:"阅读",
+ lessons:["11 坐井观天","12 寒号鸟","13 我要的是葫芦","语文园地五"],
+ zi:"观,guān,观看;沿,yán,井沿;渴,kě,口渴;话,huà,说话;弄,nòng,弄错;错,cuò,错误;际,jì,无边无际;抬,tái,抬头;信,xìn,相信;答,dá,回答;能,néng,能干;号,háo,寒号鸟;当,dāng,当作;鹊,què,喜鹊;寻,xún,寻找;枯,kū,枯草;却,què,却是;劝,quàn,劝告;刮,guā,刮风;将,jiāng,将来;冷,lěng,寒冷;重,chóng,重新;复,fù,反复;哀,āi,哀号;阵,zhèn,一阵;做,zuò,做窝;冻,dòng,冰冻;第,dì,第一;冰,bīng,冰块;亮,liàng,天亮;葫,hú,葫芦;谢,xiè,花谢;以,yǐ,可以;盯,dīng,盯着;赛,sài,比赛;怪,guài,奇怪;慢,màn,慢慢;种,zhòng,种树;棵,kē,一棵;次,cì,一次;想,xiǎng,想法;邻,lín,邻居;居,jū,居住",
+ know:[
+  ["坐井观天（寓言）","青蛙坐在井里，说天不过井口那么大；小鸟说天无边无际，大得很。青蛙只看到井口那么大的天，所以弄错了。看问题不能像青蛙那样只看到一点点。"],
+  ["寒号鸟","喜鹊勤劳，早早做窝准备过冬；寒号鸟只知道玩，总说“得过且过”“明天就做窝”，最后在夜里冻死了。做事不能懒惰、拖拉。"],
+  ["我要的是葫芦","种葫芦的人只盯着葫芦，不管叶子上的蚜虫，结果小葫芦慢慢变黄，一个一个都落了。叶子和葫芦是有联系的。"],
+  ["反问句","“叶子上的虫还用治？”意思是“叶子上的虫不用治”。反问句的意思和字面相反，语气更强。"],
+  ["语文园地五·日积月累","少年不知勤学早，老来方知读书迟。一日读书一日功，一日不读十日空。书山有路勤为径，学海无涯苦作舟。"]],
+ points:[
+  ["寓言的道理","坐井观天：眼界要开阔；寒号鸟：不能懒惰；我要的是葫芦：事物之间有联系。","寒号鸟为什么会冻死？","它懒惰，总不做窝"],
+  ["反问句改陈述句","把“还用……？”改成“不用……。”","叶子上的虫还用治？（改成陈述句）","叶子上的虫不用治。"],
+  ["多音字","号：寒号鸟 háo，号码 hào。种：种葫芦 zhòng，种子 zhǒng。","“寒号鸟”的“号”读（　　）","háo"],
+  ["名言积累","勤学名言要会背。","书山有路勤为径，________。","学海无涯苦作舟"]],
+ bank:[
+  "青蛙认为天有多大？|不过井口那么大|无边无际|像大海那么大|比山还大|青蛙说：“天不过井口那么大。”",
+  "小鸟说天怎么样？|无边无际，大得很|只有井口那么大|像一口锅|很小很小|天无边无际，大得很哪！",
+  "青蛙为什么会弄错？|它坐在井里，只看到井口那么大的天|它的眼睛不好|它没有抬头|小鸟骗了它|井口限制了青蛙看到的天。",
+  "小鸟从哪里来？|从天上来|从井里来|从树上来|从河边来|我从天上来，飞了一百多里。",
+  "喜鹊住在哪里？|大杨树上|崖缝里|井里|屋檐下|杨树上住着喜鹊。",
+  "寒号鸟把什么当作窝？|石崖上的一道缝|大杨树|草堆|山洞|寒号鸟就把这道缝当作自己的窝。",
+  "“天气暖和，得过且过。”这是谁说的？|寒号鸟|喜鹊|青蛙|小鸟|寒号鸟不听劝告，伸伸懒腰答道。",
+  "寒号鸟最后怎么样了？|在夜里冻死了|做好了窝|飞到南方|搬到喜鹊家|寒号鸟已经在夜里冻死了。",
+  "“叶子上的虫还用治？”意思是：|叶子上的虫不用治|叶子上的虫要快治|叶子上没有虫|叶子长得很好|反问句，意思是不用治。",
+  "种葫芦的人的小葫芦最后怎么样了？|慢慢变黄，一个一个都落了|长得比南瓜还大|被邻居摘走了|全都长大了|小葫芦慢慢地变黄了，一个一个都落了。",
+  "那个人为什么没有收到葫芦？|他不治叶子上的蚜虫|他忘了浇水|天气太冷|小鸟吃了葫芦|叶子上的蚜虫越来越多。",
+  "书山有路勤为径，（　　）。|学海无涯苦作舟|一日不读十日空|老来方知读书迟|无水不文章|语文园地五·日积月累",
+  "一日读书一日功，（　　）。|一日不读十日空|学海无涯苦作舟|老来方知读书迟|近水遥山皆有情|语文园地五·日积月累",
+  "“寒号鸟”的“号”读什么？|háo|hào|寒号鸟、哀号的“号”读 háo。",
+  "“种葫芦”的“种”读什么？|zhòng|zhǒng|表示种植读 zhòng。"]},
+{id:"yw6",no:6,name:"第六单元",type:"阅读",
+ lessons:["14 八角楼上","15 朱德的扁担","16 难忘的泼水节","17 刘胡兰","语文园地六"],
+ zi:"楼,lóu,楼房;代,dài,年代;穿,chuān,穿衣;利,lì,胜利;路,lù,道路;艰,jiān,艰苦;斗,dòu,斗争;军,jūn,军衣;章,zhāng,文章;握,wò,握手;觉,jué,觉得;油,yóu,油灯;革,gé,革命;命,mìng,生命;朱,zhū,朱红;德,dé,道德;扁,biǎn,扁担;担,dān,担心;同,tóng,同志;志,zhì,志气;伍,wǔ,队伍;敌,dí,敌人;根,gēn,树根;据,jù,根据;抽,chōu,抽出;陡,dǒu,陡坡;鞋,xié,草鞋;疼,téng,心疼;敬,jìng,敬爱;常,cháng,常常;非,fēi,非常;每,měi,每天;战,zhàn,战士;士,shì,护士;泼,pō,泼水;民,mín,人民;度,dù,温度;特,tè,特别;周,zhōu,周围;敲,qiāo,敲鼓;龙,lóng,龙船;串,chuàn,一串;容,róng,笑容;踩,cǎi,踩水;始,shǐ,开始;碗,wǎn,银碗;祝,zhù,祝福;寿,shòu,长寿;难,nán,难过;忘,wàng,难忘;因,yīn,因为;理,lǐ,总理;兰,lán,兰花;由,yóu,由于;于,yú,终于;卖,mài,出卖;买,mǎi,买菜;员,yuán,党员;烈,liè,烈士;荣,róng,光荣;岁,suì,十岁;题,tí,题词;反,fǎn,反对;村,cūn,村庄;被,bèi,被子;声,shēng,大声;消,xiāo,消息;息,xī,休息",
+ know:[
+  ["八角楼上","在井冈山艰苦斗争的年代，毛主席住在茅坪村的八角楼。寒冬深夜，他穿着单军衣，披着薄毯子，在油灯下写文章。"],
+  ["朱德的扁担","1928年，朱德带领队伍到井冈山。朱德同志也跟战士们一块儿下山挑粮，穿着草鞋，戴着斗笠。战士们心疼他，把扁担藏起来，他又做了一根，写上“朱德记”。大家越发敬爱朱德同志。"],
+  ["难忘的泼水节","1961年的泼水节，敬爱的周恩来总理和傣族人民一起过。人们敲起象脚鼓，撒满凤凰花瓣。周总理用银碗盛水、用柏树枝蘸水泼洒，为人们祝福。"],
+  ["刘胡兰","1947年1月12日，年轻的共产党员刘胡兰被捕，面对敌人毫不畏惧。毛主席为她题词：“生的伟大，死的光荣。”"],
+  ["语文园地六","日积月累：有志者事竟成。——《后汉书》；志当存高远。——诸葛亮；穷且益坚，不坠青云之志。——王勃。写话：学写留言条（写清楚给谁、什么事、谁留的、什么时间）。"]],
+ points:[
+  ["人物和事迹配对","毛主席—八角楼；朱德—扁担；周总理—泼水节；刘胡兰—共产党员。","和傣族人民一起过泼水节的是谁？","周恩来总理"],
+  ["时间和数字","朱德到井冈山是1928年；泼水节是1961年。","周总理和傣族人民过泼水节是哪一年？","1961年"],
+  ["留言条","留言条要有称呼、要说的事、留言人和时间。","留言条最后要写上什么？","留言人和时间"],
+  ["名言积累","“有志者事竟成”出自《后汉书》。","志当存高远。——（　　）","诸葛亮"]],
+ bank:[
+  "毛主席住在八角楼的时候在做什么？|在油灯下写文章|在挑粮|在泼水|在种葫芦|坐在竹椅上写文章。",
+  "八角楼在哪里？|井冈山茅坪村|北京|台湾省|新疆|毛主席住在茅坪村的八角楼。",
+  "朱德同志带领队伍到井冈山是哪一年？|1928年|1961年|1947年|1949年|1928年，朱德同志带领队伍到井冈山。",
+  "战士们为什么把朱德的扁担藏起来？|心疼朱德，不让他挑粮|扁担坏了|想跟他开玩笑|要拿去卖|大家看了心疼，就把他那根扁担藏了起来。",
+  "朱德在新扁担上写了什么？|朱德记|红军|井冈山|挑粮|扁担上写着“朱德记”三个字。",
+  "泼水节是哪个民族的节日？|傣族|汉族|藏族|蒙古族|傣族人民一年一度的泼水节又到了。",
+  "1961年和傣族人民一起过泼水节的是谁？|周恩来总理|朱德|毛主席|刘胡兰|敬爱的周恩来总理和他们一起过泼水节。",
+  "人们在地上撒满了什么花的花瓣？|凤凰花|桃花|杜鹃花|梅花|在地上撒满了凤凰花的花瓣。",
+  "周总理用什么蘸水泼洒？|柏树枝|松枝|柳条|手|一手拿着柏树枝蘸了水，向人们泼洒。",
+  "刘胡兰是一名年轻的什么？|共产党员|医生|老师|画家|年轻的共产党员刘胡兰被捕了。",
+  "毛主席为刘胡兰题词是什么？|生的伟大，死的光荣|有志者事竟成|志当存高远|为人民服务|毛主席亲笔为她题词：“生的伟大，死的光荣。”",
+  "“有志者事竟成”出自哪里？|《后汉书》|《论语》|《孟子》|《西游记》|语文园地六·日积月累",
+  "志当存高远。这句话是谁说的？|诸葛亮|王勃|李白|孔子|语文园地六·日积月累",
+  "写留言条，下面哪一项不需要写？|自己最喜欢的颜色|给谁留言|要说的事情|留言人和时间|留言条写清楚给谁、什么事、谁留的、什么时间。"]},
+{id:"yw7",no:7,name:"第七单元",type:"阅读",
+ lessons:["18 古诗二首：江雪、敕勒歌","19 雾在哪里","20 雪孩子","语文园地七"],
+ zi:"绝,jué,拒绝;径,jìng,小径;踪,zōng,踪影;灭,miè,熄灭;舟,zhōu,小舟;钓,diào,钓鱼;独,dú,独自;阴,yīn,阴天;野,yě,野花;苍,cāng,苍茫;茫,máng,茫然;盖,gài,盖子;论,lùn,无论;暗,àn,黑暗;岸,àn,海岸;街,jiē,街道;梁,liáng,桥梁;甚,shèn,甚至;至,zhì,至今;切,qiè,一切;躲,duǒ,躲藏;该,gāi,应该;悠,yōu,悠闲;闲,xián,空闲;散,sàn,散步;失,shī,消失;船,chuán,船只;猫,māo,小猫;步,bù,跑步;堆,duī,火堆;累,lèi,玩累;添,tiān,添柴;柴,chái,柴火;烧,shāo,燃烧;旺,wàng,兴旺;闭,bì,闭上;哎,āi,哎呀;旁,páng,旁边;冲,chōng,冲进;终,zhōng,终点;淋,lín,水淋淋;晒,shài,晒太阳;要,yào,需要;伙,huǒ,伙伴;伴,bàn,同伴;歌,gē,唱歌;忙,máng,连忙;谁,shéi,是谁;汽,qì,水汽",
+ know:[
+  ["江雪［唐］柳宗元","千山鸟飞绝，万径人踪灭。孤舟蓑笠翁，独钓寒江雪。"],
+  ["敕勒歌（北朝民歌）","敕勒川，阴山下，天似穹庐，笼盖四野。天苍苍，野茫茫，风吹草低见牛羊。“见”同“现”，读 xiàn，是显现的意思。"],
+  ["雾在哪里","雾是个淘气的孩子。他把大海、天空和太阳、海岸和城市都藏了起来，最后把自己也藏了起来，于是一切又都露出来了，雾消失了。"],
+  ["雪孩子","兔妈妈给小白兔堆了个雪孩子。小白兔家着火了，雪孩子冲进屋里救出小白兔，自己化成了水，后来变成水汽，飞上天空，变成了一朵美丽的白云。"],
+  ["语文园地七·日积月累","古诗《夜宿山寺》［唐］李白：危楼高百尺，手可摘星辰。不敢高声语，恐惊天上人。"]],
+ points:[
+  ["古诗默写","《江雪》柳宗元，《敕勒歌》北朝民歌，《夜宿山寺》李白。","孤舟蓑笠翁，________。","独钓寒江雪"],
+  ["“见”的读音","“风吹草低见牛羊”的“见”同“现”，读 xiàn。","“见牛羊”的“见”读（　　）","xiàn"],
+  ["雪孩子的变化","雪孩子→水→水汽→白云。","雪孩子最后变成了什么？","一朵白云"],
+  ["雾藏东西的顺序","大海→天空和太阳→海岸和城市→自己。","雾最后把谁藏起来了？","自己"]],
+ bank:[
+  "千山鸟飞绝，（　　）。|万径人踪灭|孤舟蓑笠翁|独钓寒江雪|风吹草低见牛羊|柳宗元《江雪》",
+  "孤舟蓑笠翁，（　　）。|独钓寒江雪|万径人踪灭|千山鸟飞绝|笼盖四野|柳宗元《江雪》",
+  "《江雪》的作者是谁？|柳宗元|李白|王之涣|胡令能|唐代诗人柳宗元。",
+  "天苍苍，野茫茫，（　　）。|风吹草低见牛羊|天似穹庐|阴山下|笼盖四野|《敕勒歌》",
+  "《敕勒歌》是什么？|北朝民歌|唐诗|宋词|童话|《敕勒歌》是北朝民歌。",
+  "“风吹草低见牛羊”的“见”读什么？|xiàn|jiàn|“见”同“现”，读 xiàn。",
+  "危楼高百尺，（　　）。|手可摘星辰|不敢高声语|恐惊天上人|疑是银河落九天|李白《夜宿山寺》",
+  "不敢高声语，（　　）。|恐惊天上人|手可摘星辰|危楼高百尺|独钓寒江雪|李白《夜宿山寺》",
+  "雾把自己比作什么？|淘气的孩子|小鸟|大海|白云|从前有一片雾，他是个淘气的孩子。",
+  "雾最先把什么藏了起来？|大海|城市|太阳|自己|有一天，雾飞到海上：“我要把大海藏起来。”",
+  "雾最后把谁藏起来了？|自己|小黑猫|太阳|桥梁|“我要把自己藏起来。”",
+  "雪孩子是谁堆的？|兔妈妈|小白兔|小猴子|小山羊|兔妈妈在门外的空地上给小白兔堆了个雪孩子。",
+  "是谁救了小白兔？|雪孩子|兔妈妈|小猴子|小山羊|雪孩子冲进屋里，找到了小白兔。",
+  "雪孩子最后变成了什么？|一朵白云|一个雪人|一棵树|一只小鸟|变成了一朵白云，一朵美丽的白云。"]},
+{id:"yw8",no:8,name:"第八单元",type:"阅读",
+ lessons:["21 称赞","22 纸船和风筝","23 快乐的小河","语文园地八"],
+ zi:"称,chēng,称赞;赞,zàn,赞美;刺,cì,刺猬;板,bǎn,木板;凳,dèng,板凳;但,dàn,但是;极,jí,好极了;傍,bàng,傍晚;苹,píng,苹果;泄,xiè,泄气;接,jiē,接过;除,chú,消除;疲,pí,疲劳;劳,láo,劳动;仔,zǐ,仔细;送,sòng,送礼;椅,yǐ,椅子;怎,zěn,怎么;拉,lā,拉手;鼠,shǔ,松鼠;折,zhé,折纸;漂,piāo,漂流;扎,zā,扎风筝;乘,chéng,乘车;抓,zhuā,抓住;线,xiàn,线团;俩,liǎ,我俩;架,jià,吵架;受,shòu,受伤;愿,yuàn,愿意;朝,cháo,朝向;取,qǔ,取下;纸,zhǐ,纸船;吵,chǎo,吵闹;句,jù,句子;哭,kū,大哭;莓,méi,草莓;撞,zhuàng,撞到;怨,yuàn,抱怨;软,ruǎn,松软;慈,cí,慈祥;祥,xiáng,吉祥;量,liàng,力量;跌,diē,跌倒;摔,shuāi,摔倒;擦,cā,擦干;咱,zán,咱们;推,tuī,推开;驶,shǐ,行驶;坚,jiān,坚强;硬,yìng,坚硬;戏,xì,游戏;爱,ài,可爱;跳,tiào,跳舞",
+ know:[
+  ["称赞","小刺猬称赞小獾的板凳“一个比一个好”，让小獾有了自信；小獾称赞小刺猬的苹果真香，消除了小刺猬一天的疲劳。真诚的称赞能让人开心、有信心。"],
+  ["纸船和风筝","松鼠住在山顶，用纸船顺着小溪送祝福；小熊住在山脚，扎风筝乘着风送祝福。他们吵架后都很难过，松鼠先在纸船上写“如果你愿意和好，就放一只风筝吧！”，两个好朋友又和好了。"],
+  ["快乐的小河","小河撞在大山上哭了，大山慈祥地鼓励他：不平静的水才有力量。小河和勇敢的泉水、瀑布成了好朋友，手拉着手一起流向远方。"],
+  ["全文不注音","《纸船和风筝》《快乐的小河》两篇课文全文不注音，要用学过的办法自己认字、读懂课文。"],
+  ["语文园地八·日积月累","己所不欲，勿施于人。——《论语》；与朋友交，言而有信。——《论语》；不以规矩，不能成方圆。——《孟子》"]],
+ points:[
+  ["称赞的作用","称赞让小獾有了自信，让小刺猬消除了疲劳。","小獾为什么送椅子给小刺猬？","因为小刺猬的称赞让他有了自信"],
+  ["谁住在哪里","松鼠住山顶（放纸船），小熊住山脚（放风筝）。","住在山脚的是谁？","小熊"],
+  ["名言出处","前两句出自《论语》，“不以规矩，不能成方圆”出自《孟子》。","与朋友交，言而有信。——（　　）","《论语》"],
+  ["课文道理","朋友之间要互相关心、主动和好；遇到困难要勇敢。","小河从泉水和瀑布身上学到了什么？","勇敢，不怕困难"]],
+ bank:[
+  "小刺猬看见小獾在做什么？|学做木工|采果子|折纸船|放风筝|他看见一只小獾在学做木工。",
+  "小刺猬怎样称赞小獾？|小板凳做得一个比一个好|你的苹果真香|你真勇敢|你做的椅子真漂亮|你真能干，小板凳做得一个比一个好！",
+  "小獾送给小刺猬什么？|一把椅子|一个板凳|两个苹果|一只纸船|他送给小刺猬一把椅子。",
+  "小獾的称赞让小刺猬怎么样？|消除了一天的疲劳|更加泄气|哭了起来|生气了|你的称赞消除了我一天的疲劳！",
+  "松鼠住在哪里？|山顶|山脚|小溪里|大树下|松鼠住在山顶，小熊住在山脚。",
+  "小熊用什么给松鼠送祝福？|风筝|纸船|苹果|椅子|纸船不能漂到山上去，他就扎了一只风筝。",
+  "纸船里的松果上写着什么？|祝你快乐！|祝你幸福！|对不起|我们和好吧|松果上挂着一张纸条：“祝你快乐！”",
+  "吵架后，是谁先写纸条想和好？|松鼠|小熊|小獾|小刺猬|松鼠在纸船上写：“如果你愿意和好，就放一只风筝吧！”",
+  "小河撞在了什么上面？|一座大山|一块石头|一棵大树|一条小船|迎面撞在一座大山上。",
+  "大山说什么样的水才有力量？|不平静的水|平静的水|干净的水|温暖的水|不平静的水才有力量。",
+  "小河最后和谁成了好朋友？|泉水和瀑布|大山和石头|小鱼和小虾|青草和野花|三个好伙伴，手拉着手一起流向远方。",
+  "己所不欲，（　　）。|勿施于人|言而有信|不能成方圆|学海无涯苦作舟|《论语》",
+  "与朋友交，（　　）。|言而有信|勿施于人|不能成方圆|志当存高远|《论语》",
+  "“不以规矩，不能成方圆”出自哪里？|《孟子》|《论语》|《后汉书》|《数九歌》|语文园地八·日积月累"]}
+];
+// 偏旁（形旁）
+var RADS={"氵 三点水":"海洋湖溪浇洒法沿渴淡潭沟泼消淋漂泄汉油","木 木字旁":"杨桐枫松柏杉桂枝棵板椅楼根村柴极","扌 提手旁":"提挑抬抽抓扎推擦摔接拉扑握","虫 虫字旁":"蝴蝶","口 口字旁":"哪嘴吵咱喂吸","钅 金字旁":"镜铜","讠 言字旁":"话识许诉论该谢","亻 单人旁":"伸位伙伴俩但仔伍依仙份仰","艹 草字头":"葫苹莓茂苦","女 女字旁":"娃婆始","月 月字旁":"腿脑肚肥","土 提土旁":"塘坡城堆","⻊ 足字旁":"踩距跌跳踪","日 日字旁":"晒晚映暗","火 火字旁":"烧炉烟","纟 绞丝旁":"线终给绝","宀 宝盖头":"宝客容","辶 走之旁":"连逃迎还"};
+
+/* 数学 · 北师大版二年级上册（2025年秋季版）
+   单元目录与课题据 dzkbw.com(2025秋版目录)、51jiaoxue.cn、11aike.com 单元知识点整理。题目由本应用随机生成。 */
+var SX_UNITS=[
+{id:"sx1",no:1,name:"第一单元",title:"100以内数加与减（二）",
+ lessons:["图书角","摘苹果","借阅图书","收玉米","跳绳","套圈游戏","数学好玩：猜数游戏"],
+ know:[
+  ["进位加法","个位相加满十，向十位进1。例：38＋5，8＋5＝13，个位写3，向十位进1，3＋1＝4，得43。"],
+  ["退位减法","个位不够减，从十位退1当10。例：42－6，12－6＝6，十位4退1还剩3，得36。"],
+  ["竖式计算","相同数位要对齐，从个位算起。加法满十进一，减法不够减向前一位退一。"],
+  ["比一个数多几、少几","求比一个数多几的数用加法，求比一个数少几的数用减法。可以画线段图帮助思考。"],
+  ["有序尝试","解决问题时按顺序一个一个试，做到不重复、不遗漏。"]],
+ points:[
+  ["进位的1忘了加","满十进一，十位上要多加1。","27＋15＝？（错写成32）","42"],
+  ["个位不够减就倒过来减","42－6 不能用 6－2，要从十位退1。","42－6＝？（错写成44）","36"],
+  ["退位后十位忘了减1","退了1，十位要少1。","53－18＝？（错写成45）","35"],
+  ["看到“多”就加","先想清楚谁多谁少。","小红跳了35下，比小明多8下，小明跳了几下？","35－8＝27（下）"]]},
+{id:"sx2",no:2,name:"第二单元",title:"测量（一）",
+ lessons:["教室有多长","课桌有多长","1米有多长"],
+ know:[
+  ["统一长度单位","用脚步、铅笔量的结果不一样，所以要用统一的长度单位：厘米和米。"],
+  ["认识厘米","厘米可以写成 cm。量较短的物体用厘米，比如铅笔、橡皮、数学书。"],
+  ["认识米","米可以写成 m。量较长的物体用米，比如教室、黑板、旗杆。1米＝100厘米。"],
+  ["用尺子量","物体的一端对准尺子的0刻度，另一端对着几，就是几厘米。如果没有从0开始，就用大数减小数。"],
+  ["先估再量","先在心里想一想大约有多长，再用尺子量一量。"]],
+ points:[
+  ["不从0刻度量起","从2量到8，长度是 8－2＝6 厘米。","铅笔一端对着3，另一端对着10，铅笔长几厘米？","7厘米"],
+  ["单位选错","课桌高约70厘米，不是70米。","一张课桌高约70（　）","厘米"],
+  ["1米＝100厘米","比较长短要先统一单位。","1米和90厘米，哪个长？","1米长"]]},
+{id:"sx3",no:3,name:"第三单元",title:"数一数与乘法",
+ lessons:["小小清点员","儿童乐园","点子图中的乘法","动物聚会","快乐的动物"],
+ know:[
+  ["几个几个地数","可以2个2个、5个5个地数，数得又快又对。"],
+  ["乘法的意义","求几个相同加数的和，可以用乘法。3＋3＋3＋3 是4个3，写成 4×3 或 3×4，读作“4乘3”。"],
+  ["乘法各部分名称","在 4×3＝12 中，4和3都叫乘数，12叫积。"],
+  ["倍的认识","一个数里有几个另一个数，就说它是另一个数的几倍。白兔2只，黑兔6只，6里有3个2，黑兔是白兔的3倍。"]],
+ points:[
+  ["不是相同加数不能直接写乘法","2＋3＋4 加数不同，不能写成乘法。","5＋5＋5 改写成乘法算式","3×5 或 5×3"],
+  ["几倍不是多几","6是2的3倍；6比2多4。","8是2的几倍？","4倍"],
+  ["乘法各部分名称","乘号两边是乘数，得数是积。","在 6×2＝12 中，12叫作（　）","积"]]},
+{id:"sx4",no:4,name:"第四单元",title:"乘法口诀（一）",
+ lessons:["文物中的乘法口诀（5的口诀）","做家务（2的口诀）","需要几个轮子（3和4的口诀）","回家路上（解决问题）","综合实践：画校园路线图（认识东南西北）"],
+ know:[
+  ["5的乘法口诀","一五得五，二五一十，三五十五，四五二十，五五二十五，五六三十，五七三十五，五八四十，五九四十五。"],
+  ["2、3、4的乘法口诀","一句口诀可以写两个乘法算式，例如“三四十二”：3×4＝12，4×3＝12。"],
+  ["口诀的规律","同一个数的口诀，相邻两句的得数相差这个数。例如3的口诀，每句多3。忘了口诀，可以往前加或往回减。"],
+  ["认识东南西北","面向北方时，右边是东，左边是西，背后是南。地图通常是上北下南、左西右东。"]],
+ points:[
+  ["容易记错的口诀","三七二十一，三八二十四，四七二十八。","4×7＝？","28（四七二十八）"],
+  ["用口诀解决问题","每份同样多，求几份一共多少，用乘法。","每辆三轮车有3个轮子，6辆有几个轮子？","3×6＝18（个）"],
+  ["方向","面向北，右手是东。","面向北方，你的左边是什么方向？","西"]]},
+{id:"sx5",no:5,name:"第五单元",title:"分一分与除法",
+ lessons:["分物游戏","分水果","分糖果","分香蕉","小熊开店","花园"],
+ know:[
+  ["平均分","每份分得同样多，叫作平均分。"],
+  ["平均分的两种情况","①知道分成几份，求每份几个；②知道每份几个，求能分成几份。两种都用除法。"],
+  ["认识除法","12÷3＝4，读作“12除以3等于4”。12是被除数，3是除数，4是商。"],
+  ["用口诀求商","算12÷3，想：三（四）十二，所以商是4。"],
+  ["几倍用除法","求一个数是另一个数的几倍，用除法。12朵红花，4朵黄花，12÷4＝3，红花是黄花的3倍。"]],
+ points:[
+  ["没有平均分不能用除法","每份同样多才是平均分。","8个苹果分成3个、5个，是平均分吗？","不是"],
+  ["分清两种平均分","“平均分给4人”求每人几个；“每人4个”求分给几人。","12个桃，每只猴分3个，可以分给几只猴？","12÷3＝4（只）"],
+  ["除法各部分名称","被除数÷除数＝商。","在 15÷5＝3 中，5叫作（　）","除数"]]},
+{id:"sx6",no:6,name:"第六单元",title:"图形的运动（一）",
+ lessons:["折一折，做一做","好玩的华容道"],
+ know:[
+  ["对称","把一个图形对折，折痕两边完全重合，这样的图形是对称的。"],
+  ["平移","物体沿着直线移动，方向不变，比如推拉抽屉、电梯上下。"],
+  ["旋转","物体绕着一个点转动，比如风车转动、钟表指针走动。"],
+  ["华容道里的移动","说移动时要说清楚：谁，向哪个方向（上、下、左、右），移动了几格。"]],
+ points:[
+  ["判断对称","对折后两边要完全一样。","“王”“我”哪个字是对称的？","王"],
+  ["平移还是旋转","沿直线动是平移，绕点转是旋转。","拉开抽屉是什么运动？","平移"],
+  ["数格子","看同一个点移动了几格。","一个方块从第2格移到第5格，向右移了几格？","3格"]]},
+{id:"sx7",no:7,name:"第七单元",title:"乘法口诀（二）",
+ lessons:["有多少张贴画（6的口诀）","《西游记》中的乘法口诀（7、8、9的口诀）","有多少无人机","做个乘法表"],
+ know:[
+  ["6～9的乘法口诀","如：六七四十二，七八五十六，八九七十二，九九八十一。"],
+  ["拆分推算","忘了口诀可以拆开算：6×7＝6×5＋6×2＝30＋12＝42。"],
+  ["乘法表的规律","两个乘数交换位置，积不变；同一行里，相邻两个积相差同样的数。"]],
+ points:[
+  ["得数大的口诀容易记错","七八五十六，八九七十二，六八四十八，七九六十三。","8×9＝？","72（八九七十二）"],
+  ["拆分推算","把一个乘数拆成两个数。","6×7＝6×5＋6×（　）","2"],
+  ["点阵求总数","用乘法算一共有多少个。","每行有7架无人机，有6行，一共有几架？","6×7＝42（架）"]]},
+{id:"sx8",no:8,name:"第八单元",title:"乘除法的应用（一）",
+ lessons:["长颈鹿与小鸟（用7～9的口诀求商）","农家小院（用乘法或除法解决问题）","综合实践：参加欢乐购物活动"],
+ know:[
+  ["用口诀求商","算63÷7，想：七（九）六十三，所以商是9。"],
+  ["乘法还是除法","求几个几是多少用乘法；平均分、求一个数里有几个几用除法；求一个数的几倍是多少用乘法；求一个数是另一个数的几倍用除法。"],
+  ["两步问题","先算出中间的数，再算最后的答案，不要只算一步。"],
+  ["最多能分几组","找口诀里最接近总数、又不超过总数的那句。例如20个，每组6个，想三六十八，最多分3组。"]],
+ points:[
+  ["见到“每”字就用除法？","要看求什么：每盒6个，4盒一共几个，用乘法。","每盒6个，4盒一共几个？","6×4＝24（个）"],
+  ["两步问题只算一步","把题目的问题读完。","每排4人，有3排，又来了5人，一共几人？","4×3＋5＝17（人）"],
+  ["最多几组","积不能比总数大。","20个苹果，每盒装6个，最多能装满几盒？","3盒"]]}
+];
+
+/* ================= 语文：数据整理与题型 ================= */
+const ALLZ=[],WORDS={},RAD={};
+YW_UNITS.forEach(u=>{u.Z=u.zi.split(";").map(s=>{const a=s.split(",");return {z:a[0],p:a[1],w:a[2],uid:u.id};});
+  u.Z.forEach(x=>{ALLZ.push(x);WORDS[x.w]=1;});u.subj="yuwen";u.title=u.name+"·"+u.type;});
+for(const k in RADS){for(const ch of RADS[k])RAD[ch]=k;}
+const RADLIST=Object.keys(RADS);
+function pyOf(z,p){return '<span class="py">'+esc(p)+'</span>';}
+function g_zi2py(u){const it=pick(u.Z),pp=parsePy(it.p);
+  const cand=[1,2,3,4].filter(t=>t!==pp.t).map(t=>mark(pp.b,t));
+  const other=shuffle(ALLZ.filter(x=>parsePy(x.p).b!==pp.b))[0].p;
+  const opts=[it.p].concat(shuffle(cand).slice(0,2),[other]);
+  return chQ({tip:"这个字怎么读？选出正确的拼音",prompt:'<div class="qbig kai">'+it.z+'</div>',opts:opts,cls:"py small",
+    sayAfter:[it.z+"，"+it.w,"zh-CN"],explain:'<b class="kai big1">'+it.z+'</b> 读 <b class="py">'+esc(it.p)+'</b>，组词：<b>'+it.w+'</b>',label:"“"+it.z+"”的读音",key:"zp:"+it.z+it.p});}
+function g_py2zi(u){const it=pick(u.Z);const seen={};seen[it.p]=1;const opts=[it.z];
+  const pool=shuffle(u.Z.filter(x=>x.z!==it.z)).concat(shuffle(ALLZ));
+  for(const x of pool){if(opts.length>=4)break;if(seen[x.p]||opts.indexOf(x.z)>=0)continue;seen[x.p]=1;opts.push(x.z);}
+  return chQ({tip:"看拼音，选出正确的字",prompt:'<div class="qmid py">'+esc(it.p)+'</div>',opts:opts,cls:"kai",
+    say:[it.w,"zh-CN"],explain:'<b class="kai big1">'+it.z+'</b>（'+esc(it.p)+'）组词：<b>'+it.w+'</b>',label:"看拼音 "+it.p+" 选字",key:"pz:"+it.z+it.p});}
+function g_word(u){const cands=u.Z.filter(x=>x.w.split(x.z).length===2);const it=pick(cands);
+  const opts=[it.z];
+  for(const x of shuffle(u.Z.concat(ALLZ))){if(opts.length>=4)break;if(opts.indexOf(x.z)>=0||it.w.indexOf(x.z)>=0)continue;if(WORDS[it.w.replace(it.z,x.z)])continue;opts.push(x.z);}
+  const shown=it.w.replace(it.z,"（　）");
+  return chQ({tip:"选字组词：括号里应该填哪个字？",prompt:'<div class="qmid">'+shown+'</div>',opts:opts,cls:"kai",
+    sayAfter:[it.w,"zh-CN"],explain:'组词：<b>'+it.w+'</b>（'+esc(it.p)+'）',label:"选字组词："+shown,key:"wd:"+it.w});}
+function g_rad(u){const cands=u.Z.filter(x=>RAD[x.z]);if(!cands.length)return g_zi2py(u);const it=pick(cands);const r=RAD[it.z];
+  const opts=[r].concat(shuffle(RADLIST.filter(x=>x!==r)).slice(0,3));
+  return chQ({tip:"这个字的偏旁是什么？",prompt:'<div class="qbig kai">'+it.z+'</div>',opts:opts,cls:"small",
+    sayAfter:[it.z+"，"+it.w,"zh-CN"],explain:'<b class="kai big1">'+it.z+'</b> 的偏旁是 <b>'+r+'</b>，组词：'+it.w,label:"“"+it.z+"”的偏旁",key:"rd:"+it.z});}
+function g_bank(u){const i=rnd(0,u.bank.length-1);return bankQ(u,i);}
+function bankQ(u,i){const p=u.bank[i].split("|");const q=p[0],ex=p[p.length-1],opts=p.slice(1,p.length-1);
+  const isPy=/^[a-zāáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü]+$/.test(opts[0]);const short=opts.every(o=>o.length<=2&&!isPy);
+  return chQ({tip:u.name+" · 选一选",prompt:'<div class="qtext">'+esc(q)+'</div>',opts:opts,cls:isPy?"py small":(short?"kai":"small"),
+    say:[zhSay(q),"zh-CN"],explain:esc(ex),label:q,key:"bk:"+u.id+":"+i});}
+YW_UNITS.forEach(u=>{u.gens=[[g_zi2py,3],[g_py2zi,2],[g_word,2],[g_rad,1],[g_bank,4]];});
+
+/* ================= 数学：题型 ================= */
+function carryAdd(a,b){return a%10+b%10>=10;}
+function borrowSub(a,b){return a%10<b%10;}
+function m_add(force){let a,b,n=0;const carry=force!==undefined?force:Math.random()<.75;
+  do{a=rnd(10,89);b=Math.random()<.5?rnd(2,9):rnd(10,89);}while((a+b>100||carryAdd(a,b)!==carry)&&n++<300);
+  return eqQ(a+"+"+b,a+b,a+" + "+b+" = <b>"+(a+b)+"</b>"+(carry?"（个位满十，向十位进1）":""));}
+function m_sub(force){let a,b,n=0;const br=force!==undefined?force:Math.random()<.75;
+  do{a=rnd(20,99);b=Math.random()<.5?rnd(2,9):rnd(10,a-1);}while((b>=a||borrowSub(a,b)!==br)&&n++<300);
+  return eqQ(a+"-"+b,a-b,a+" − "+b+" = <b>"+(a-b)+"</b>"+(br?"（个位不够减，从十位退1）":""));}
+function vert(a,op,b){return '<table class="vt"><tr><td></td><td>'+(a>9?Math.floor(a/10):"")+'</td><td>'+a%10+'</td></tr><tr><td>'+op+'</td><td>'+(b>9?Math.floor(b/10):"")+'</td><td>'+b%10+'</td></tr><tr class="line"><td colspan="3"></td></tr></table>';}
+function m_vertical(){const add=Math.random()<.5;let a,b,n=0;
+  do{a=rnd(12,89);b=rnd(11,79);}while((add?(a+b>100||!carryAdd(a,b)):(b>=a||!borrowSub(a,b)))&&n++<300);
+  const r=add?a+b:a-b,op=add?"+":"−";
+  return numQ({tip:"用竖式计算，相同数位对齐",prompt:'<div class="vwrap">'+vert(a,op,b)+'<div class="qeq small">= '+AB+'</div></div>',ans:r,say:[zhSay(a+op+b)+"等于几？","zh-CN"],
+    explain:add?"个位 "+a%10+"＋"+b%10+" 满十进一，结果 <b>"+r+"</b>":"个位 "+a%10+" 不够减 "+b%10+"，从十位退1，结果 <b>"+r+"</b>",label:"竖式 "+a+" "+op+" "+b,key:"v:"+a+op+b});}
+function m_compare(){const t=rnd(1,4);const names=pick([["小红","小明"],["小华","小军"],["姐姐","弟弟"]]);const thing=pick([["跳绳","下"],["套中","个"],["借书","本"]]);
+  let a,b,ans,ex,txt;
+  if(t===1){a=rnd(20,80);b=rnd(3,19);ans=a+b;txt=names[1]+thing[0]+a+thing[1]+"，"+names[0]+"比"+names[1]+"多"+b+thing[1]+"，"+names[0]+thing[0]+"多少"+thing[1]+"？";ex="求比"+a+"多"+b+"的数，用加法："+a+"＋"+b+"＝"+ans;}
+  else if(t===2){a=rnd(30,95);b=rnd(3,25);ans=a-b;txt=names[1]+thing[0]+a+thing[1]+"，"+names[0]+"比"+names[1]+"少"+b+thing[1]+"，"+names[0]+thing[0]+"多少"+thing[1]+"？";ex="求比"+a+"少"+b+"的数，用减法："+a+"－"+b+"＝"+ans;}
+  else if(t===3){a=rnd(30,95);b=rnd(3,25);ans=a-b;txt=names[0]+thing[0]+a+thing[1]+"，比"+names[1]+"多"+b+thing[1]+"，"+names[1]+thing[0]+"多少"+thing[1]+"？";ex=names[0]+"多，"+names[1]+"少，用减法："+a+"－"+b+"＝"+ans+"（看到“多”不一定用加法）";}
+  else{a=rnd(20,80);b=rnd(3,19);ans=a+b;txt=names[0]+thing[0]+a+thing[1]+"，比"+names[1]+"少"+b+thing[1]+"，"+names[1]+thing[0]+"多少"+thing[1]+"？";ex=names[1]+"多，用加法："+a+"＋"+b+"＝"+ans+"（看到“少”不一定用减法）";}
+  return wordQ(txt,ans,thing[1],ex);}
+// 测量
+function rulerSVG(s,e){const W=620,L=24,cm=46;let g='<svg viewBox="0 0 '+W+' 150" class="ruler" role="img" aria-label="尺子">';
+  g+='<rect x="'+(L+s*cm)+'" y="18" width="'+((e-s)*cm)+'" height="34" rx="8" fill="#ffa94d" stroke="#e8590c" stroke-width="2"/>';
+  g+='<rect x="8" y="64" width="'+(W-16)+'" height="74" rx="8" fill="#fff3bf" stroke="#d9a400" stroke-width="2"/>';
+  for(let i=0;i<=12;i++){const x=L+i*cm;g+='<line x1="'+x+'" y1="64" x2="'+x+'" y2="94" stroke="#5c4400" stroke-width="2"/><text x="'+x+'" y="122" font-size="22" text-anchor="middle" fill="#5c4400">'+i+'</text>';
+    if(i<12)g+='<line x1="'+(x+cm/2)+'" y1="64" x2="'+(x+cm/2)+'" y2="80" stroke="#5c4400" stroke-width="1.5"/>';}
+  g+='<text x="'+(W-30)+'" y="122" font-size="18" fill="#5c4400">cm</text></svg>';return g;}
+function m_ruler(){const s=rnd(0,4),len=rnd(2,8),e=Math.min(12,s+len);const L=e-s;
+  return numQ({tip:"量一量：橙色纸条长几厘米？",prompt:rulerSVG(s,e)+'<div class="qeq small">'+AB+' 厘米</div>',ans:L,unit:"厘米",say:["橙色纸条长几厘米？","zh-CN"],
+    explain:s===0?"一端对准0，另一端对着 "+e+"，长 <b>"+L+"</b> 厘米":"从 "+s+" 量到 "+e+"，"+e+"－"+s+"＝<b>"+L+"</b> 厘米",label:"尺子读数：从"+s+"到"+e,key:"r:"+s+"-"+e});}
+const UNITITEMS=[["一支铅笔长约18（　）","厘米"],["一块橡皮长约4（　）","厘米"],["数学书长约26（　）","厘米"],["一张课桌高约70（　）","厘米"],["一根筷子长约24（　）","厘米"],["小明身高约130（　）","厘米"],["教室长约9（　）","米"],["黑板长约4（　）","米"],["一张床长约2（　）","米"],["一棵大树高约10（　）","米"],["旗杆高约12（　）","米"],["一个手指宽约1（　）","厘米"]];
+function m_unit(){const i=rnd(0,UNITITEMS.length-1),it=UNITITEMS[i];
+  return chQ({tip:"填上合适的长度单位",prompt:'<div class="qtext">'+it[0]+'</div>',opts:[it[1],it[1]==="米"?"厘米":"米"],keep:true,cls:"small",say:[zhSay(it[0]),"zh-CN"],
+    explain:it[0].replace("（　）","<b>"+it[1]+"</b>")+"。短的用厘米，长的用米。",key:"un:"+i});}
+function m_convert(){const t=rnd(1,4);
+  if(t===1)return numQ({prompt:'<div class="qeq">1 米 = '+AB+' 厘米</div>',ans:100,say:["1米等于几厘米？","zh-CN"],explain:"1米＝<b>100</b>厘米",key:"cv1",label:"1米＝（　）厘米"});
+  if(t===2)return numQ({prompt:'<div class="qeq">100 厘米 = '+AB+' 米</div>',ans:1,say:["100厘米等于几米？","zh-CN"],explain:"100厘米＝<b>1</b>米",key:"cv2",label:"100厘米＝（　）米"});
+  if(t===3){const x=rnd(1,9)*10;return numQ({prompt:'<div class="qeq">1 米 − '+x+' 厘米 = '+AB+' 厘米</div>',ans:100-x,say:["1米减"+x+"厘米等于几厘米？","zh-CN"],explain:"1米＝100厘米，100－"+x+"＝<b>"+(100-x)+"</b>厘米",key:"cv3:"+x,label:"1米－"+x+"厘米＝（　）厘米"});}
+  const a=rnd(2,40),b=rnd(2,40);return numQ({prompt:'<div class="qeq">'+a+' 厘米 + '+b+' 厘米 = '+AB+' 厘米</div>',ans:a+b,say:[a+"厘米加"+b+"厘米等于几厘米？","zh-CN"],explain:a+"＋"+b+"＝<b>"+(a+b)+"</b>厘米",key:"cv4:"+a+"+"+b,label:a+"厘米＋"+b+"厘米＝（　）厘米"});}
+function m_cmp(){const x=pick([50,80,90,99,100,100,10]);const left=Math.random()<.5;
+  const L=left?"1 米":x+" 厘米",R=left?x+" 厘米":"1 米";const real=left?(x<100?">":"="):(x<100?"<":"=");
+  return chQ({tip:"比一比，选出正确的符号",prompt:'<div class="qeq">'+L+' ○ '+R+'</div>',opts:[real].concat([">","<","="].filter(s=>s!==real)),cls:"",say:[zhSay(L+"和"+R+"比，圈里填什么？"),"zh-CN"],
+    explain:"1米＝100厘米，所以 "+L+" <b>"+real+"</b> "+R,label:L+" ○ "+R,key:"cmp:"+L+R});}
+// 乘法意义与倍
+const EMO=["🍎","🍓","🐟","⭐","🌸","🚗","🎈","🍌"];
+function groupsHTML(n,k,e){let h='<div class="groups">';for(let i=0;i<n;i++){h+='<span class="grp">'+e.repeat(k)+'</span>';}return h+'</div>';}
+function m_groups(){let n=rnd(2,5),k=rnd(2,5);while(k===n)k=rnd(2,5);const e=pick(EMO);
+  if(Math.random()<.5)return numQ({tip:"一共有多少个？",prompt:groupsHTML(n,k,e)+'<div class="qeq small">'+n+' × '+k+' = '+AB+'</div>',ans:n*k,say:[n+"个"+k+"是多少？","zh-CN"],explain:n+"个"+k+"，"+n+"×"+k+"＝<b>"+(n*k)+"</b>",label:n+"组，每组"+k+"个，一共几个",key:"gp:"+n+"x"+k});
+  return chQ({tip:"哪个算式表示图中一共有多少个？",prompt:groupsHTML(n,k,e),opts:mulOpts(n,k),cls:"small",say:["哪个算式表示一共有多少个？","zh-CN"],explain:"有"+n+"个"+k+"，可以写成 <b>"+n+"×"+k+"</b>（也可以写成 "+k+"×"+n+"）",label:n+"组，每组"+k+"个，选算式",key:"gc:"+n+"x"+k});}
+function mulOpts(n,k){const c=[n+"×"+k,n+"+"+k,k+"×"+k,(n+1)+"×"+k,n+"×"+(k+1),(n-1)+"×"+k,n+"×"+n];const o=[];for(const x of c){if(x===k+"×"+n&&x!==c[0])continue;if(o.indexOf(x)<0)o.push(x);if(o.length>=4)break;}return o;}
+function m_addmul(){let n=rnd(3,5),k=rnd(2,9);while(k===n)k=rnd(2,9);const s=Array(n).fill(k).join("+");
+  return chQ({tip:"把加法算式改写成乘法算式",prompt:'<div class="qeq small">'+s+'</div>',opts:mulOpts(n,k),cls:"small",say:[zhSay(s)+"，改写成乘法","zh-CN"],explain:n+"个"+k+"相加，写成 <b>"+n+"×"+k+"</b> 或 "+k+"×"+n,label:s+" 改写成乘法",key:"am:"+s});}
+function m_names(){const a=rnd(2,9),b=rnd(2,9),c=a*b;
+  if(Math.random()<.5)return chQ({tip:"乘法各部分的名称",prompt:'<div class="qtext">在 '+a+' × '+b+' = '+c+' 中，'+c+' 叫作（　）</div>',opts:["积","乘数","和","差"],cls:"small",explain:"乘号两边的数叫乘数，得数叫<b>积</b>",key:"nm1:"+a+"x"+b,label:"在"+a+"×"+b+"＝"+c+"中，"+c+"叫作（　）"});
+  return chQ({tip:"乘法各部分的名称",prompt:'<div class="qtext">在 '+a+' × '+b+' = '+c+' 中，'+a+' 叫作（　）</div>',opts:["乘数","积","加数","和"],cls:"small",explain:a+" 和 "+b+" 都叫<b>乘数</b>，"+c+" 叫积",key:"nm2:"+a+"x"+b,label:"在"+a+"×"+b+"＝"+c+"中，"+a+"叫作（　）"});}
+function m_times(div){const a=rnd(2,div?9:5),t=rnd(2,div?9:5);const an=pick([["白兔","黑兔","只"],["黄花","红花","朵"],["小鸟","小鸭","只"]]);
+  return wordQ(an[0]+"有"+a+an[2]+"，"+an[1]+"有"+(a*t)+an[2]+"，"+an[1]+"的数量是"+an[0]+"的几倍？",t,"倍",(a*t)+"里面有"+t+"个"+a+(div?"，用除法："+(a*t)+"÷"+a+"＝"+t:"")+"，是 <b>"+t+"</b> 倍",(div?"td:":"tm:")+a+"x"+t);}
+function m_nofk(){const n=rnd(2,5),k=rnd(2,9);return numQ({prompt:'<div class="qeq">'+n+' 个 '+k+' 是 '+AB+'</div>',ans:n*k,say:[n+"个"+k+"是多少？","zh-CN"],explain:n+"个"+k+"：<b>"+n+"×"+k+"＝"+(n*k)+"</b>",label:n+"个"+k+"是多少",key:"nk:"+n+"x"+k});}
+// 乘法口诀
+function pairIn(range){ // range: "a-b" 口诀表中较大乘数（口诀所属）
+  const r=range.split("-").map(Number);const big=rnd(r[0],r[1]);const small=rnd(1,big);return [small,big];}
+function pair25(){return pairIn("2-5");}
+function m_kjfill(p){const [x,y]=p;const k=kj(x,y);const head=CN[x]+CN[y]+(x*y<10?"得":"");
+  return numQ({tip:"口诀填空：说出得数",prompt:'<div class="qeq">'+head+' '+AB+'</div><div class="note">（'+x+' × '+y+'）</div>',ans:x*y,say:[head+"几？","zh-CN"],sayAfter:[k,"zh-CN"],explain:"口诀：<b>"+k+"</b>",label:"口诀 "+head+"（　）",key:"kf:"+x+"x"+y});}
+function m_mul(p){let [x,y]=p;if(Math.random()<.5)[x,y]=[y,x];const k=kj(x,y);const q=eqQ(x+"*"+y,x*y,"口诀：<b>"+k+"</b>　"+x+" × "+y+" = <b>"+x*y+"</b>","m:"+x+"x"+y);q.sayAfter=[k,"zh-CN"];return q;}
+function m_kjchoice(p){const [x,y]=p;const cand=[[x,y],[x,Math.min(9,y+1)],[x,Math.max(1,y-1)],[Math.max(1,x-1),y],[x+1>y?x:x+1,y],[x,y===9?7:9]];
+  const seen={},opts=[];for(const c of cand){const s=kj(c[0],c[1]);if(!seen[s]){seen[s]=1;opts.push(s);}if(opts.length>=4)break;}
+  let a=x,b=y;if(Math.random()<.5)[a,b]=[b,a];
+  return chQ({tip:"计算时用哪句口诀？",prompt:'<div class="qeq">'+a+' × '+b+'</div>',opts:opts,cls:"small",say:[zhSay(a+"×"+b)+"用哪句口诀？","zh-CN"],explain:a+" × "+b+" 用口诀 <b>"+kj(x,y)+"</b>",label:a+"×"+b+" 用哪句口诀",key:"kc:"+x+"x"+y});}
+function m_mulword(lo,hi){const k=rnd(lo,hi),n=hi<=5?rnd(2,5):rnd(2,9);
+  const T=[["每辆三轮车有3个轮子，"+n+"辆三轮车一共有几个轮子？",3,"个"],["每辆小汽车有4个轮子，"+n+"辆小汽车一共有几个轮子？",4,"个"],["每盘放"+k+"个苹果，"+n+"盘一共有几个苹果？",k,"个"],["每行坐"+k+"人，"+n+"行一共坐几人？",k,"人"],["每张贴画纸上有"+k+"张贴画，"+n+"张纸一共有几张贴画？",k,"张"],["一个星期有7天，"+n+"个星期一共有几天？",7,"天"]];
+  const cands=T.filter(t=>t[1]>=lo&&t[1]<=hi);const t=pick(cands.length?cands:T);
+  return wordQ(t[0],t[1]*n,t[2],"求"+n+"个"+t[1]+"是多少，用乘法："+t[1]+"×"+n+"＝<b>"+(t[1]*n)+"</b>（"+kj(t[1],n)+"）");}
+const DIRS=[["面向北方时，你的右边是（　）方。","东","西","南","北"],["面向北方时，你的左边是（　）方。","西","东","南","北"],["面向北方时，你的背后是（　）方。","南","北","东","西"],["地图通常是上（　）下南，左西右东。","北","东","南","西"],["地图上，右边一般是（　）方。","东","西","南","北"],["早上，太阳从（　）方升起。","东","西","南","北"]];
+function m_dir(){const i=rnd(0,DIRS.length-1),d=DIRS[i];return chQ({tip:"认识东南西北",prompt:'<div class="qtext">'+d[0]+'</div>',opts:d.slice(1),cls:"kai",say:[zhSay(d[0]),"zh-CN"],explain:d[0].replace("（　）","<b>"+d[1]+"</b>"),key:"dir:"+i});}
+// 除法
+function m_div(lo,hi){const d=rnd(lo,hi),q=rnd(1,9),a=d*q;const k=kj(d,q);const qq=eqQ(a+"/"+d,q,"想口诀：<b>"+k+"</b>，所以 "+a+" ÷ "+d+" = <b>"+q+"</b>","d:"+a+"/"+d);qq.sayAfter=[k,"zh-CN"];return qq;}
+function m_avg(){const t=pick([8,10,12,14,16,18]);const h=t/2;const opts=[h+"个和"+h+"个"];const s=new Set([h]);while(opts.length<4){const a=rnd(1,t-1);if(s.has(a)||s.has(t-a))continue;s.add(a);opts.push(Math.min(a,t-a)+"个和"+Math.max(a,t-a)+"个");}
+  return chQ({tip:"哪种分法是平均分？",prompt:'<div class="qtext">把 '+t+' 个桃子分成两份，哪种分法是平均分？</div>',opts:opts,cls:"small",say:["把"+t+"个桃子分成两份，哪种分法是平均分？","zh-CN"],explain:"每份同样多才是平均分："+t+"＝"+h+"＋"+h,key:"avg:"+t});}
+function m_divword2(lo,hi){const d=rnd(lo,hi),q=rnd(2,9),a=d*q;const T=pick([["桃","猴","只","个"],["糖","小朋友","个","块"],["香蕉","小熊","只","根"]]);
+  if(Math.random()<.5)return wordQ(a+T[3]+T[0]+"平均分给"+d+T[2]+T[1]+"，每"+T[2]+T[1]+"分几"+T[3]+"？",q,T[3],"平均分成"+d+"份，求每份几个，用除法："+a+"÷"+d+"＝<b>"+q+"</b>（"+kj(d,q)+"）");
+  return wordQ(a+T[3]+T[0]+"，每"+T[2]+T[1]+"分"+d+T[3]+"，可以分给几"+T[2]+T[1]+"？",q,T[2],"求"+a+"里有几个"+d+"，用除法："+a+"÷"+d+"＝<b>"+q+"</b>（"+kj(d,q)+"）");}
+function m_divnames(){const d=rnd(2,9),q=rnd(2,9),a=d*q;const which=rnd(0,2);const nm=["被除数","除数","商"][which],v=[a,d,q][which];
+  return chQ({tip:"除法各部分的名称",prompt:'<div class="qtext">在 '+a+' ÷ '+d+' = '+q+' 中，'+v+' 叫作（　）</div>',opts:[nm].concat(["被除数","除数","商","乘数"].filter(x=>x!==nm).slice(0,3)),cls:"small",explain:a+" 是被除数，"+d+" 是除数，"+q+" 是商",key:"dn:"+a+"/"+d+":"+which,label:"在"+a+"÷"+d+"＝"+q+"中，"+v+"叫作（　）"});}
+// 图形的运动
+const SYM=["王","中","田","工","土","日","目","回","山"],NSYM=["我","你","好","的","说","把","快","很","们","打"];
+const MOTION=[["拉开抽屉","平移"],["电梯上上下下","平移"],["升国旗","平移"],["推拉窗户","平移"],["小火车在直直的轨道上开","平移"],["风车转动","旋转"],["钟表的指针走动","旋转"],["陀螺转动","旋转"],["转动方向盘","旋转"],["拧开水龙头","旋转"]];
+function m_sym(){const y=pick(SYM);const ns=shuffle(NSYM).slice(0,3);return chQ({tip:"对折后两边完全一样，就是对称的",prompt:'<div class="qtext">下面哪个字是对称的？</div>',opts:[y].concat(ns),cls:"kai",say:["下面哪个字是对称的？","zh-CN"],explain:"“"+y+"”对折后两边完全一样，是对称的",key:"sym:"+y});}
+function m_motion(){const i=rnd(0,MOTION.length-1),m=MOTION[i];return chQ({tip:"平移还是旋转？",prompt:'<div class="qtext">'+m[0]+'，是什么运动？</div>',opts:[m[1],m[1]==="平移"?"旋转":"平移"],keep:true,cls:"",say:[m[0]+"，是平移还是旋转？","zh-CN"],explain:m[0]+"是<b>"+m[1]+"</b>："+(m[1]==="平移"?"沿直线移动，方向不变":"绕着一个点转动"),key:"mo:"+i});}
+function gridSVG(p,q){let g='<svg viewBox="0 0 560 90" class="grid8" role="img" aria-label="方格">';for(let i=0;i<8;i++){g+='<rect x="'+(10+i*67)+'" y="12" width="62" height="62" rx="8" fill="#fff" stroke="#adb5bd" stroke-width="2"/>';}
+  g+='<rect x="'+(14+p*67)+'" y="16" width="54" height="54" rx="8" fill="none" stroke="#4dabf7" stroke-width="4" stroke-dasharray="8 6"/>';
+  g+='<rect x="'+(14+q*67)+'" y="16" width="54" height="54" rx="8" fill="#4dabf7"/></svg>';return g;}
+function m_grid(){let p,q;do{p=rnd(0,7);q=rnd(0,7);}while(p===q);const d=Math.abs(q-p),dir=q>p?"右":"左",o=q>p?"左":"右";
+  const opts=["向"+dir+"移"+d+"格","向"+o+"移"+d+"格","向"+dir+"移"+(d+1)+"格",d>1?"向"+dir+"移"+(d-1)+"格":"向"+o+"移"+(d+1)+"格"];
+  return chQ({tip:"虚线框是原来的位置，蓝色方块移到了哪里？",prompt:gridSVG(p,q),opts:opts,cls:"small",say:["蓝色方块是怎样移动的？","zh-CN"],explain:"从虚线框数到蓝色方块：<b>向"+dir+"移"+d+"格</b>",label:"方块从第"+(p+1)+"格移到第"+(q+1)+"格",key:"gd:"+p+"-"+q});}
+// 6~9口诀拆分
+function m_split(){const a=rnd(2,9),b=rnd(6,9);return numQ({tip:"拆开算一算",prompt:'<div class="qeq small">'+a+' × '+b+' = '+a+' × 5 + '+a+' × '+AB+'</div>',ans:b-5,say:[zhSay(a+"×"+b+"="+a+"×5+"+a+"×（）"),"zh-CN"],explain:b+"＝5＋"+(b-5)+"，所以填 <b>"+(b-5)+"</b>："+a+"×5＋"+a+"×"+(b-5)+"＝"+(a*5)+"＋"+(a*(b-5))+"＝"+(a*b),label:a+"×"+b+"＝"+a+"×5＋"+a+"×（　）",key:"sp:"+a+"x"+b});}
+// 乘除法的应用
+function m_apply(){const t=rnd(1,5);const k=rnd(6,9),n=rnd(2,9);
+  if(t===1)return wordQ("每盒有"+k+"个鸡蛋，"+n+"盒一共有几个鸡蛋？",k*n,"个","求"+n+"个"+k+"是多少，用乘法："+k+"×"+n+"＝<b>"+k*n+"</b>（不是看到“每”就用除法）");
+  if(t===2)return wordQ((k*n)+"个鸡蛋，平均放进"+n+"个盒子，每盒放几个？",k,"个","平均分，用除法："+(k*n)+"÷"+n+"＝<b>"+k+"</b>（"+kj(k,n)+"）");
+  if(t===3)return wordQ((k*n)+"个鸡蛋，每盒放"+k+"个，需要几个盒子？",n,"个","求"+(k*n)+"里有几个"+k+"，用除法："+(k*n)+"÷"+k+"＝<b>"+n+"</b>（"+kj(k,n)+"）");
+  if(t===4){const a=rnd(2,9),m=rnd(2,9);return wordQ("院子里有"+a+"只鸡，鸭的只数是鸡的"+m+"倍，鸭有几只？",a*m,"只","求"+a+"的"+m+"倍是多少，用乘法："+a+"×"+m+"＝<b>"+a*m+"</b>");}
+  const a=rnd(2,9),m=rnd(2,9);return wordQ("院子里有"+a+"只鸡，"+(a*m)+"只鸭，鸭的只数是鸡的几倍？",m,"倍","求一个数是另一个数的几倍，用除法："+(a*m)+"÷"+a+"＝<b>"+m+"</b>");}
+function m_twostep(){if(Math.random()<.5){let k,n,m;do{k=rnd(3,9);n=rnd(2,9);m=rnd(2,9);}while(k*n+m>100);return wordQ("每排坐"+k+"人，坐了"+n+"排，又来了"+m+"人，一共有几人？",k*n+m,"人","先算 "+k+"×"+n+"＝"+(k*n)+"，再算 "+(k*n)+"＋"+m+"＝<b>"+(k*n+m)+"</b>");}
+  let k,n;do{k=rnd(2,9);n=rnd(2,9);}while(k*n>50);return wordQ("每支铅笔"+k+"元，买"+n+"支，付了50元，应找回几元？",50-k*n,"元","先算 "+k+"×"+n+"＝"+(k*n)+"元，再算 50－"+(k*n)+"＝<b>"+(50-k*n)+"</b>元");}
+function m_maxg(){const k=rnd(3,9),q=rnd(1,9),r=rnd(1,k-1),t=k*q+r;return wordQ(t+"个苹果，每盒装"+k+"个，最多能装满几盒？",q,"盒","想口诀：<b>"+kj(k,q)+"</b>，"+(k*q)+"比"+t+"小，"+(k*(q+1))+"比"+t+"大，所以最多装满 <b>"+q+"</b> 盒");}
+// 连加连减（拓展）
+function m_hh(){let a,b,c,o1,o2,ok=false,n=0;while(!ok&&n++<500){a=rnd(10,60);b=rnd(3,40);c=rnd(3,40);o1=pick(["+","-"]);o2=pick(["+","-"]);const m=o1==="+"?a+b:a-b,r=o2==="+"?m+c:m-c;ok=m>=0&&m<=100&&r>=0&&r<=100;}
+  const m=o1==="+"?a+b:a-b,r=o2==="+"?m+c:m-c;return eqQ(a+o1+b+o2+c,r,"先算前两个数得 "+m+"，再算第三个数得 <b>"+r+"</b>");}
+
+SX_UNITS.forEach(u=>{u.subj="shuxue";});
+const SXG={
+ sx1:[[()=>m_add(),3],[()=>m_sub(),3],[m_vertical,2],[m_compare,2]],
+ sx2:[[m_ruler,3],[m_unit,2],[m_convert,2],[m_cmp,2]],
+ sx3:[[m_groups,3],[m_addmul,2],[m_names,1],[()=>m_times(false),2],[m_nofk,2]],
+ sx4:[[()=>m_kjfill(pair25()),3],[()=>m_mul(pair25()),3],[()=>m_kjchoice(pair25()),1],[()=>m_mulword(2,5),2],[m_dir,1]],
+ sx5:[[m_avg,1],[()=>m_div(2,5),4],[()=>m_divword2(2,5),2],[m_divnames,1],[()=>m_times(true),2]],
+ sx6:[[m_sym,3],[m_motion,3],[m_grid,3]],
+ sx7:[[()=>m_kjfill(pairIn("6-9")),3],[()=>m_mul(pairIn("6-9")),3],[m_split,2],[()=>m_kjchoice(pairIn("6-9")),1],[()=>m_mulword(6,9),2]],
+ sx8:[[()=>m_div(6,9),3],[m_apply,3],[m_twostep,2],[m_maxg,2]]};
+SX_UNITS.forEach(u=>{u.gens=SXG[u.id];});
+
+/* ================= 综合练习（按题型） ================= */
+const SM="b玻 p坡 m摸 f佛 d得 t特 n讷 l勒 g哥 k科 h喝 j鸡 q七 x西 zh知 ch吃 sh诗 r日 z资 c次 s丝 y衣 w乌".split(" ");
+const YM="a啊 o喔 e鹅 i衣 u乌 ü鱼 ai爱 ei杯 ui围 ao熬 ou欧 iu优 ie耶 üe月 er耳 an安 en恩 in因 un温 ün晕 ang昂 eng灯 ing英 ong红".split(" ");
+const ZT="zhi知 chi吃 shi诗 ri日 zi资 ci次 si丝 yi衣 wu乌 yu鱼 ye叶 yue月 yuan圆 yin音 yun云 ying鹰".split(" ");
+const PY_ALL=[];
+[[SM,"声母"],[YM,"韵母"],[ZT,"整体认读音节"]].forEach(([arr,c])=>arr.forEach(s=>{const m=s.match(/^([a-zü]+)(.+)$/);PY_ALL.push({p:m[1],ex:m[2],c:c});}));
+const SPELL="b,a,1,八 p,a,2,爬 m,a,1,妈 m,a,3,马 f,a,1,发 d,a,4,大 t,a,1,他 n,a,2,拿 l,a,1,拉 g,e,1,哥 k,e,4,课 h,e,2,河 j,i,1,鸡 q,i,2,骑 x,i,3,洗 zh,u,1,猪 ch,i,1,吃 sh,u,1,书 z,i,4,字 c,ao,3,草 s,an,1,三 g,ou,3,狗 m,ao,1,猫 n,iu,2,牛 x,üe,2,学 b,ei,3,北 l,ai,2,来 sh,ui,3,水 h,ai,3,海 d,ong,1,东 f,eng,1,风 x,ing,1,星 sh,an,1,山 m,en,2,门 l,ü,4,绿 n,ü,3,女 q,ü,4,去 j,ü,2,菊 t,ou,2,头 h,ong,2,红 y,ang,2,羊 w,o,3,我".split(" ").map(s=>{const a=s.split(",");return {i:a[0],f:a[1],t:+a[2],c:a[3]};});
+const syl=it=>it.i+(/^(j|q|x|y)$/.test(it.i)?it.f.replace("ü","u"):it.f);
+function p_cls(){const it=pick(PY_ALL);return chQ({tip:"它是声母、韵母，还是整体认读音节？",prompt:'<div class="qbig py">'+esc(it.p)+'</div><div class="note">例字：'+it.ex+'</div>',opts:["声母","韵母","整体认读音节"],keep:true,cols:1,cls:"small",
+  say:[it.ex,"zh-CN"],explain:'<b class="py">'+esc(it.p)+'</b> 是<b>'+it.c+'</b>',label:it.p+" 属于哪一类",key:"pc:"+it.p});}
+function p_spell(){const k=rnd(0,SPELL.length-1),it=SPELL[k],s=syl(it),right=mark(s,it.t);
+  if(Math.random()<.5)return chQ({tip:"“"+it.c+"”怎么拼？选出声调正确的音节",prompt:'<div class="qmid kai">'+it.c+'</div><div class="qmid py s24">'+it.i+' + '+it.f+' → ?</div>',opts:[right].concat([1,2,3,4].filter(t=>t!==it.t).map(t=>mark(s,t))),cls:"py small",
+    sayAfter:[it.c,"zh-CN"],explain:'<b class="py">'+right+'</b>　<b class="kai big1">'+it.c+'</b>',label:it.c+"："+it.i+"+"+it.f,key:"ps1:"+k});
+  const seen={};seen[right]=1;const opts=[right];for(const x of shuffle(SPELL)){if(opts.length>=4)break;const m=mark(syl(x),it.t);if(!seen[m]){seen[m]=1;opts.push(m);}}
+  return chQ({tip:"把声母和韵母拼起来，选出正确的音节",prompt:'<div class="qmid py">'+it.i+' + '+mark(it.f,it.t)+' → ?</div>',opts:opts,cls:"py small",say:[it.c,"zh-CN"],sayAfter:[it.c,"zh-CN"],
+    explain:'<b class="py">'+it.i+'</b> + <b class="py">'+mark(it.f,it.t)+'</b> → <b class="py">'+right+'</b>（'+it.c+'）',label:it.i+"+"+mark(it.f,it.t),key:"ps2:"+k});}
+const PF={yuwen:"yw",shuxue:"sx"};
+const ALLU={yuwen:{units:YW_UNITS},shuxue:{units:SX_UNITS}};
+const MIX={
+ yuwen:[["zi","🀄","全册生字认读","看字选拼音、看拼音选字",()=>{const u=pick(YW_UNITS);return Math.random()<.5?g_zi2py(u):g_py2zi(u);}],
+        ["word","🧱","选字组词","全册生字组词",()=>g_word(pick(YW_UNITS))],
+        ["rad","🔍","偏旁","认一认偏旁",()=>g_rad(pick(YW_UNITS))],
+        ["read","📚","课文与积累","全册课文、古诗、日积月累",()=>g_bank(pick(YW_UNITS))],
+        ["pys","🧩","拼音复习：拼一拼","声母＋韵母＋声调",p_spell],
+        ["pyc","🗃️","拼音复习：分一分","声母 / 韵母 / 整体认读",p_cls]],
+ shuxue:[["ks","🧮","100以内加减","进位加、退位减",()=>Math.random()<.5?m_add():m_sub()],
+         ["hh","🔗","连加·连减·混合（拓展）","先算前两个数",m_hh],
+         ["mul","✖️","乘法口诀练习","2~9 的口诀",()=>{const r=D.settings.mulRange;return m_mul(r==="2-5"?pair25():pairIn(r==="6-9"?"6-9":"2-9"));}],
+         ["div","➗","表内除法","用口诀求商",()=>{const r=D.settings.mulRange.split("-").map(Number);return m_div(r[0],r[1]);}],
+         ["apply","📝","乘除法应用题","选乘法还是除法",m_apply]]};
+function wpick(gens){const tot=gens.reduce((s,g)=>s+g[1],0);let r=Math.random()*tot;for(const g of gens){r-=g[1];if(r<0)return g[0];}return gens[0][0];}
+function genSet(sources,n){ // sources: [{gens,uid,subj}] 轮流出题，去重
+  const out=[],seen={};let guard=0,i=0;
+  while(out.length<n&&guard++<n*120){const s=sources[i%sources.length];i++;let q;try{q=wpick(s.gens)(s.u);}catch(e){console.warn(e);continue;}
+    if(!q||seen[q.key])continue;seen[q.key]=1;q.subj=s.subj;q.uid=s.uid||"";out.push(q);}
+  return out;}
+const unitSrc=u=>({gens:u.gens.map(g=>[()=>g[0](u),g[1]]),u:u,uid:u.id,subj:u.subj});
+const TESTS={"yw-mid":{subj:"yuwen",name:"期中测试",units:[1,2,3,4],n:30,min:40},"yw-final":{subj:"yuwen",name:"期末测试",units:[1,2,3,4,5,6,7,8],n:40,min:60},
+  "sx-mid":{subj:"shuxue",name:"期中测试",units:[1,2,3,4],n:30,min:40},"sx-final":{subj:"shuxue",name:"期末测试",units:[1,2,3,4,5,6,7,8],n:40,min:60}};
+function testInfo(id){if(TESTS[id])return TESTS[id];const u=findUnit(id);return {subj:u.subj,name:u.name+"测试",units:[u.no],n:20,min:20,uid:id};}
+function findUnit(id){return YW_UNITS.concat(SX_UNITS).find(u=>u.id===id);}
+function unitsOf(subj){return ALLU[subj].units;}
+function bestOf(id){const a=D.tests[id]||[];return a.length?Math.max(...a.map(x=>x.score)):null;}
+function lastOf(id){const a=D.tests[id]||[];return a.length?a[a.length-1]:null;}
+
+/* ================= 路由与渲染 ================= */
+let R={screen:"home"},Q=null;
+const SUBJ={yuwen:{name:"语文",ic:"📖",cls:"yw",book:"统编版（人教社）二年级上册"},shuxue:{name:"数学",ic:"🔢",cls:"sx",book:"北师大版二年级上册"}};
+const STICKERS=[[3,"🌱","小芽芽"],[8,"🐣","小鸡出壳"],[15,"🌈","彩虹"],[25,"🐰","小兔子"],[40,"🍉","大西瓜"],[60,"🚀","小火箭"],[80,"🐼","大熊猫"],[100,"🏅","百星勋章"],[130,"🦄","独角兽"],[160,"🎨","小画家"],[200,"🐬","海豚"],[250,"🦁","小狮子"],[300,"🏆","奖杯"],[360,"🌟","闪亮之星"],[420,"🐉","小龙"],[500,"👑","学习之星"],[600,"🎓","小博士"],[750,"🪐","星球探险家"],[900,"💎","钻石勋章"],[1000,"🎖️","千星大勋章"]];
+const unlocked=()=>STICKERS.filter(s=>D.stars>=s[0]).length;
+const acc=o=>o&&o.ans?Math.round(o.ok*100/o.ans):0;
+function setScreen(s,extra){document.querySelectorAll(".confetti,.toast,.float-star").forEach(e=>e.remove());if(Q&&Q.tick&&s!=="quiz"){clearInterval(Q.tick);Q.tick=null;}
+  R=Object.assign({screen:s},extra||{});if(synth)try{synth.cancel();}catch(e){}render();window.scrollTo(0,0);}
+function header(title,back){return '<div class="top">'+(back?'<button class="btn" data-act="back" aria-label="返回">⬅ 返回</button>':'')+'<h1>'+title+'</h1><span class="pill" id="starpill">⭐ '+D.stars+'</span></div>';}
+function scoreTag(id){const b=bestOf(id);if(b===null)return '<span class="tag gray">未测试</span>';return '<span class="tag '+(b>=90?"good":b>=60?"mid":"low")+'">最高 '+b+' 分</span>';}
+
+function render(){let h="";
+ switch(R.screen){
+ case "home":
+  h='<div class="top"><h1>🌟 小星星学习乐园</h1><span class="pill" id="starpill">⭐ '+D.stars+'</span></div><main><div class="hero"><div class="t">今天想学什么？</div><div class="s">二年级上册 · 按课本单元学习</div></div><div class="subjects">';
+  ["yuwen","shuxue"].forEach(k=>{const S=SUBJ[k],us=unitsOf(k);const done=us.filter(u=>U(u.id).ans>0).length;const tested=us.filter(u=>bestOf(u.id)!==null).length;
+   h+='<button class="subj '+S.cls+'" data-act="units" data-k="'+k+'"><div class="ic">'+S.ic+'</div><div class="nm">'+S.name+'</div><div class="ds">'+S.book+'</div>'+
+     '<div class="ds">已练 '+done+'/8 单元 · 已测 '+tested+'/8 单元</div><div class="bar"><i style="width:'+Math.round(done*100/8)+'%"></i></div></button>';});
+  h+='</div><div class="row"><button class="btn pri" data-act="stickers">🏅 贴纸勋章墙（'+unlocked()+'/'+STICKERS.length+'）</button><button class="btn" data-act="parent">👨‍👩‍👧 家长区</button></div>';
+  if(!synth)h+='<p class="note center">提示：这台设备的浏览器不支持朗读，题目仍可正常练习。</p>';
+  h+='</main>';break;
+ case "units":h=renderUnits();break;
+ case "unit":h=renderUnit();break;
+ case "exam":h=renderExam();break;
+ case "mix":h=renderMix();break;
+ case "quiz":h=renderQuiz();break;
+ case "summary":h=renderSummary();break;
+ case "result":h=renderResult();break;
+ case "browse":h=renderBrowse();break;
+ case "stickers":
+  h=header("🏅 贴纸勋章墙",true)+'<main><p class="center">已经得到 <b>'+D.stars+'</b> 颗星，解锁了 <b>'+unlocked()+'</b> 枚贴纸！</p><div class="stk">';
+  STICKERS.forEach(s=>{const ok=D.stars>=s[0];h+='<div class="s'+(ok?"":" lock")+'"><div class="e">'+s[1]+'</div><b>'+(ok?s[2]:"？？？")+'</b><small>'+(ok?"已解锁":"还差 "+(s[0]-D.stars)+" 颗星")+'</small></div>';});
+  h+='</div></main>';break;
+ case "parent":h=renderParent();break;}
+ $("#app").innerHTML=h;
+ if(R.screen==="quiz"&&Q&&!Q.answered&&Q.mode==="practice"&&D.settings.auto&&Q.cur.say&&!Q.said[Q.i]){Q.said[Q.i]=1;const sy=Q.cur.say,qi=Q.i;setTimeout(()=>{if(R.screen==="quiz"&&Q.i===qi)speak(sy[0],sy[1]);},250);}
+}
+function renderUnits(){const k=R.k,S=SUBJ[k];let h=header(S.ic+" "+S.name+" · 单元",true)+'<main class="'+S.cls+'">';
+ h+='<div class="opts-line"><div class="seg"><button class="on">二年级上册</button><button data-act="xiace">二年级下册</button></div><span class="note">'+S.book+'</span></div><div class="ulist">';
+ unitsOf(k).forEach(u=>{const st=U(u.id);const sub=k==="yuwen"?u.lessons.filter(l=>!/园地|读书吧/.test(l)).map(l=>l.replace(/^(识字)?\d+\s*/,"")).join("、"):u.title;
+  h+='<button class="uc" data-act="unit" data-u="'+u.id+'"><div class="uno">'+u.no+'</div><div class="ub"><b>'+u.name+(k==="yuwen"?" · "+u.type:"")+'</b><small>'+esc(sub)+'</small>'+
+   '<div class="ubar"><i style="width:'+Math.min(100,st.ans*5)+'%"></i></div><div class="tags">'+(st.k?'<span class="tag good">知识点✓</span>':'')+(st.p?'<span class="tag good">考点✓</span>':'')+(st.ans?'<span class="tag mid">练习 '+st.ans+' 题 · '+acc(st)+'%</span>':'')+scoreTag(u.id)+'</div></div></button>';
+  if(u.no===4)h+=examCard(PF[k]+"-mid");});
+ h+=examCard(PF[k]+"-final")+'</div><div class="row"><button class="btn blue" data-act="mix" data-k="'+k+'">🎲 综合练习（按题型）</button>';
+ const wn=D.wrong.filter(w=>w.subj===k).length;if(wn)h+='<button class="btn red" data-act="wrongpractice" data-k="'+k+'">📕 错题本再练（'+wn+' 题）</button>';
+ return h+'</div></main>';}
+function examCard(id){const t=TESTS[id];return '<button class="uc exam" data-act="exam" data-id="'+id+'"><div class="uno">'+(id.indexOf("mid")>0?"中":"末")+'</div><div class="ub"><b>📝 '+t.name+'</b><small>'+(id.indexOf("mid")>0?"覆盖第一～四单元":"覆盖全册八个单元")+' · '+t.n+' 题</small><div class="tags">'+scoreTag(id)+'</div></div></button>';}
+function renderUnit(){const u=findUnit(R.u),S=SUBJ[u.subj],tab=R.tab||"k";const st=U(u.id);
+ if(tab==="k"&&!st.k){st.k=1;save();}if(tab==="p"&&!st.p){st.p=1;save();}
+ let h=header(S.ic+" "+u.name+(u.subj==="yuwen"?"·"+u.type:"·"+u.title),true)+'<main class="'+S.cls+'">';
+ h+='<div class="lessons">'+u.lessons.map(l=>'<span>'+esc(l)+'</span>').join("")+'</div>';
+ h+='<div class="tabs">'+[["k","📖 知识点"],["p","🎯 考点"],["x","✏️ 练习"],["t","📝 测试"]].map(t=>'<button class="'+(tab===t[0]?"on":"")+'" data-act="tab" data-t="'+t[0]+'">'+t[1]+'</button>').join("")+'</div>';
+ if(tab==="k"){u.know.forEach(k=>{h+='<div class="kcard"><button class="spk2" data-act="say" data-t="'+esc(k[0]+"。"+zhSay(k[1]))+'" aria-label="朗读">🔊</button><h3>'+esc(k[0])+'</h3><p>'+esc(k[1])+'</p></div>';});
+   if(u.Z){h+='<div class="sec">✏️ 本单元生字（点一点听读音）</div><div class="grid-cards">';u.Z.forEach(x=>{h+='<button class="zc" data-act="say" data-t="'+esc(x.z+"，"+x.w)+'"><div class="p py">'+esc(x.p)+'</div><div class="z kai">'+x.z+'</div><div class="w">'+x.w+'</div></button>';});h+='</div>';}}
+ else if(tab==="p"){u.points.forEach((p,i)=>{h+='<div class="kcard pt"><button class="spk2" data-act="say" data-t="'+esc(p[0]+"。"+zhSay(p[1])+"。例题："+zhSay(p[2]))+'" aria-label="朗读">🔊</button><h3>🎯 '+esc(p[0])+'</h3><p>'+esc(p[1])+'</p><div class="ex"><b>例题：</b>'+esc(p[2])+'</div><button class="btn small-btn" data-act="reveal" data-i="'+i+'">👀 看答案</button><div class="exa" id="exa'+i+'" hidden>答案：<b>'+esc(p[3])+'</b></div></div>';});}
+ else if(tab==="x"){h+='<div class="panel center"><p>本单元练习：随机出题，答错的题会在本轮最后再练一次。</p><div class="opts-line cc"><b>每轮题数</b><div class="seg">'+[5,10,15,20].map(n=>'<button class="'+(D.settings.qn===n?"on":"")+'" data-act="qn" data-n="'+n+'">'+n+' 题</button>').join("")+'</div></div>'+
+   '<button class="btn pri big" data-act="practice" data-u="'+u.id+'">▶ 开始练习</button><p class="note">已练 '+st.rounds+' 轮 · '+st.ans+' 题 · 正确率 '+acc(st)+'%</p></div>';}
+ else{h+=testPanel(u.id);}
+ return h+'</main>';}
+function testPanel(id){const t=testInfo(id);const hist=(D.tests[id]||[]).slice(-5).reverse();
+ let h='<div class="panel center"><h3>📝 '+t.name+'</h3><p>共 <b>'+t.n+'</b> 题，答完再看对错，满分 100 分。</p><div class="opts-line cc"><b>计时</b><div class="seg"><button class="'+(!D.settings.timed?"on":"")+'" data-act="timed" data-v="0">不限时</button><button class="'+(D.settings.timed?"on":"")+'" data-act="timed" data-v="1">限时 '+t.min+' 分钟</button></div></div>'+
+  '<button class="btn pri big" data-act="starttest" data-id="'+id+'">▶ 开始测试</button></div>';
+ if(hist.length){h+='<div class="panel"><h3 class="m0">历次成绩</h3><table><tr><th>时间</th><th>分数</th><th>答对</th><th>用时</th></tr>'+hist.map(r=>'<tr><td>'+fmtT(r.t)+'</td><td><b>'+r.score+'</b></td><td>'+r.ok+'/'+r.n+'</td><td>'+fmtSec(r.sec)+'</td></tr>').join("")+'</table></div>';}
+ return h;}
+function renderExam(){const t=TESTS[R.id],S=SUBJ[t.subj];return header(S.ic+" "+S.name+" · "+t.name,true)+'<main class="'+S.cls+'"><div class="kcard"><h3>考试范围</h3><p>'+t.units.map(n=>unitsOf(t.subj)[n-1].name+(t.subj==="yuwen"?"·"+unitsOf(t.subj)[n-1].type:"·"+unitsOf(t.subj)[n-1].title)).join("、")+'</p></div>'+testPanel(R.id)+'</main>';}
+function renderMix(){const k=R.k,S=SUBJ[k];let h=header(S.ic+" "+S.name+" · 综合练习",true)+'<main class="'+S.cls+'"><div class="opts-line"><b>每轮题数</b><div class="seg">'+[5,10,15,20].map(n=>'<button class="'+(D.settings.qn===n?"on":"")+'" data-act="qn" data-n="'+n+'">'+n+' 题</button>').join("")+'</div></div>';
+ if(k==="shuxue")h+='<div class="opts-line"><b>口诀范围</b><div class="seg">'+["2-5","6-9","2-9"].map(r=>'<button class="'+(D.settings.mulRange===r?"on":"")+'" data-act="rg" data-r="'+r+'">'+r.replace("-","~")+'</button>').join("")+'</div></div>';
+ h+='<div class="menu" style="margin-top:14px">'+MIX[k].map(m=>{const st=D.modes[k+m[0]];return '<button class="mi" data-act="mixstart" data-m="'+m[0]+'"><span class="ic">'+m[1]+'</span><span><b>'+m[2]+'</b><small>'+m[3]+(st&&st.ans?" · 正确率 "+acc(st)+"%":"")+'</small></span></button>';}).join("");
+ h+=k==="yuwen"?'<button class="mi" data-act="browse" data-k="py"><span class="ic">📋</span><span><b>拼音表</b><small>声母 · 韵母 · 整体认读</small></span></button>':'<button class="mi" data-act="browse" data-k="kj"><span class="ic">📜</span><span><b>乘法口诀表</b><small>点一点就能听</small></span></button>';
+ return h+'</div></main>';}
+
+/* ================= 答题引擎 ================= */
+function fmtT(t){const d=new Date(t);return (d.getMonth()+1)+"月"+d.getDate()+"日 "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);}
+function fmtSec(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+"分"+("0"+s%60).slice(-2)+"秒";}
+function startPractice(items,o){if(!items.length){toast("暂时没有题目");return;}
+ Q=Object.assign({mode:"practice",items:items,i:0,base:items.length,okFirst:0,stars:0,wrongs:[],said:{}},o);loadQ();setScreen("quiz");}
+function startTest(id){const t=testInfo(id);const us=unitsOf(t.subj).filter(u=>t.units.indexOf(u.no)>=0);
+ const items=genSet(us.map(unitSrc),t.n);
+ Q={mode:"test",testId:id,title:(t.uid?"":SUBJ[t.subj].name+" · ")+t.name,subj:t.subj,items:items,i:0,base:items.length,answers:[],start:Date.now(),limit:D.settings.timed?t.min*60:0,said:{}};
+ loadQ();setScreen("quiz");Q.tick=setInterval(tickTest,1000);}
+function tickTest(){if(!Q||Q.mode!=="test"||R.screen!=="quiz")return;const el=$("#timer");const sec=(Date.now()-Q.start)/1000;
+ if(Q.limit){const left=Q.limit-sec;if(el)el.textContent="⏱ 剩余 "+fmtSec(left);if(left<=0){toast("时间到！自动交卷");finishTest();}}else if(el)el.textContent="⏱ "+fmtSec(sec);}
+function loadQ(){Q.cur=Q.items[Q.i];Q.answered=false;Q.input="";}
+function renderQuiz(){const c=Q.cur,total=Q.items.length,pct=Math.round(Q.i*100/total),test=Q.mode==="test";
+ let h=header(Q.title,true)+'<main class="quiz"><div class="prog"><b>'+(Q.i+1)+' / '+total+'</b><div class="track"><i style="width:'+pct+'%"></i></div>'+(test?'<span class="pill" id="timer">⏱</span>':'<span class="pill" id="roundstar">本轮 ⭐ '+Q.stars+'</span>')+'</div><div class="qwrap"><div class="qcard">'+
+  (c.retry?'<span class="retry-tag">🔁 错题再练</span>':'')+(test?'<span class="retry-tag blue">测试中</span>':'')+'<div class="tip">'+c.tip+'</div>'+c.prompt+'<div class="explain" id="explain"></div>'+
+  ((c.say||c.sayAfter)?'<button class="spk" data-act="speak" aria-label="朗读"'+(synth?'':' disabled')+'>🔊</button>':'')+'</div>';
+ if(c.kind==="choice"){const cols=c.cols||(c.options.length===3?3:2);h+='<div class="choices c'+cols+'">'+c.options.map((o,i)=>'<button class="ch '+(o.cls||"")+'" data-act="choose" data-i="'+i+'">'+esc(o.label)+'</button>').join("")+'</div>';}
+ else h+='<div class="pad">'+[1,2,3,4,5,6,7,8,9].map(n=>'<button data-act="key" data-n="'+n+'">'+n+'</button>').join("")+'<button class="del" data-act="del">⌫ 删除</button><button data-act="key" data-n="0">0</button><button class="ok" data-act="submit">'+(test?"下一题":"✔ 确定")+'</button></div>';
+ h+='</div>'+(test?'<div class="row"><button class="btn" data-act="handin">📤 交卷</button></div>':'<div class="feedback" id="fb"><span class="msg" id="fbmsg"></span><button class="btn pri" data-act="next" id="nextbtn">下一题 ➜</button></div>')+'</main>';
+ return h;}
+const PRAISE=["太棒了！","答对啦！","真聪明！","你真厉害！","完全正确！","好样的！"],SOFT=["没关系，再想一想～","差一点点，记住它哦！","别灰心，下次一定行！"];
+function addWrong(c){const i=D.wrong.findIndex(w=>w.key===c.key);const q=Object.assign({},c);delete q.retry;
+ if(i>=0){D.wrong[i].n=Math.min(3,D.wrong[i].n+1);D.wrong[i].t=Date.now();}else D.wrong.unshift({key:c.key,subj:c.subj,uid:c.uid,q:q,n:1,t:Date.now()});if(D.wrong.length>200)D.wrong.length=200;}
+function answer(val,btn){if(Q.answered)return;const c=Q.cur,ok=String(val)===c.ans;
+ if(Q.mode==="test"){Q.answered=true;Q.answers[Q.i]={v:String(val),ok:ok};if(btn)btn.classList.add("picked");SFX.pick();setTimeout(()=>{if(R.screen!=="quiz"||Q.mode!=="test")return;if(Q.i<Q.items.length-1){Q.i++;loadQ();render();tickTest();}else finishTest();},350);return;}
+ Q.answered=true;const st=D.subj[c.subj];const us=c.uid?U(c.uid):null;const mk=Q.modeKey?(D.modes[Q.modeKey]||(D.modes[Q.modeKey]={ans:0,ok:0})):null;
+ if(!c.retry){st.ans++;if(us)us.ans++;if(mk)mk.ans++;if(ok){st.ok++;if(us)us.ok++;if(mk)mk.ok++;Q.okFirst++;}}
+ const wi=D.wrong.findIndex(w=>w.key===c.key);
+ if(ok){D.stars++;Q.stars++;SFX.ok();flyStar(btn);if(wi>=0&&(Q.fromWrong||c.retry)){D.wrong[wi].n--;if(D.wrong[wi].n<=0)D.wrong.splice(wi,1);}}
+ else{SFX.bad();addWrong(c);if(!c.retry)Q.wrongs.push(Object.assign({},c,{retry:true}));}
+ save();
+ if(c.kind==="choice"){const bs=document.querySelectorAll(".ch");c.options.forEach((o,i)=>{bs[i].disabled=true;if(o.v===c.ans)bs[i].classList.add("right");});if(!ok&&btn)btn.classList.add("wrong");}
+ else{const ab=$("#ansbox");if(ab){ab.textContent=c.ans;ab.style.color=ok?"var(--ok)":"var(--bad)";}document.querySelectorAll(".pad button").forEach(b=>b.disabled=true);}
+ $("#explain").innerHTML=(ok?"":"正确答案：<b>"+esc(c.ansText)+"</b><br>")+c.explain;
+ $("#fb").className="feedback show "+(ok?"ok":"bad");$("#fbmsg").innerHTML=ok?"🎉 "+pick(PRAISE)+" ⭐+1":"🤗 "+pick(SOFT)+(c.retry?"":"（本轮最后会再练一次）");
+ $("#starpill").textContent="⭐ "+D.stars;const rs=$("#roundstar");if(rs)rs.textContent="本轮 ⭐ "+Q.stars;
+ if(Q.i===Q.items.length-1&&!Q.wrongs.length)$("#nextbtn").textContent="看成绩 🏁";
+ if(c.sayAfter){const qi=Q.i;setTimeout(()=>{if(R.screen==="quiz"&&Q.i===qi)speak(c.sayAfter[0],c.sayAfter[1]);},ok?700:500);}
+ if(ok)Q.autoT=setTimeout(()=>{if(R.screen==="quiz"&&Q.answered&&Q.mode==="practice")next();},c.sayAfter?2600:1500);}
+function next(){clearTimeout(Q.autoT);if(Q.i<Q.items.length-1){Q.i++;loadQ();render();return;}
+ if(Q.wrongs.length){Q.items=Q.items.concat(Q.wrongs);Q.wrongs=[];Q.i++;loadQ();render();toast("把刚才错的题再练一次吧！");return;}finishPractice();}
+function finishPractice(){const bonus=(Q.base>=5&&Q.okFirst===Q.base)?3:0;D.stars+=bonus;Q.stars+=bonus;Q.bonus=bonus;
+ if(!Q.fromWrong){D.subj[Q.subj].rounds++;if(Q.uid)U(Q.uid).rounds++;}
+ D.log.unshift({t:Date.now(),title:Q.title,n:Q.base,ok:Q.okFirst});if(D.log.length>60)D.log.length=60;save();SFX.win();setScreen("summary");confetti();}
+function finishTest(){if(!Q||Q.mode!=="test"||Q.done)return;Q.done=true;clearInterval(Q.tick);Q.tick=null;
+ const n=Q.items.length;let ok=0;Q.items.forEach((q,i)=>{const a=Q.answers[i];if(a&&a.ok)ok++;else addWrong(q);});
+ const score=Math.round(ok*100/n),sec=(Date.now()-Q.start)/1000;const gain=Math.round(score/10);D.stars+=gain;
+ (D.tests[Q.testId]||(D.tests[Q.testId]=[])).push({t:Date.now(),score:score,ok:ok,n:n,sec:Math.round(sec),timed:!!Q.limit});if(D.tests[Q.testId].length>20)D.tests[Q.testId].shift();
+ D.log.unshift({t:Date.now(),title:Q.title,n:n,ok:ok});if(D.log.length>60)D.log.length=60;save();
+ Q.result={score:score,ok:ok,n:n,sec:sec,gain:gain};SFX.win();setScreen("result");if(score>=80)confetti();}
+function renderSummary(){const rate=Math.round(Q.okFirst*100/Q.base),face=rate===100?"🏆":rate>=80?"🌟":rate>=60?"😊":"💪";
+ const words=rate===100?"全部答对，你是最棒的！":rate>=80?"非常好，继续保持！":rate>=60?"不错哦，再练一练会更好！":"每天进步一点点，加油！";
+ let h=header("本轮成绩",false)+'<main><div class="sum"><div class="big">'+face+'</div><h2>'+words+'</h2><div class="stats"><div class="st"><b>'+rate+'%</b>正确率</div><div class="st"><b>'+Q.okFirst+' / '+Q.base+'</b>第一次就答对</div><div class="st"><b>⭐ '+Q.stars+'</b>获得星星</div></div>'+(Q.bonus?'<p>🎁 全对奖励：额外 '+Q.bonus+' 颗星！</p>':'');
+ const nw=STICKERS.filter(s=>D.stars>=s[0]&&D.stars-Q.stars<s[0]);if(nw.length)h+='<p class="big2">🎉 解锁新贴纸：'+nw.map(s=>s[1]+" "+s[2]).join("、")+'</p>';
+ return h+'<div class="row"><button class="btn pri" data-act="again">🔄 再来一轮</button><button class="btn" data-act="backto">📚 返回</button></div></div></main>';}
+function renderResult(){const r=Q.result,face=r.score>=90?"🏆":r.score>=80?"🌟":r.score>=60?"😊":"💪";
+ let h=header("测试成绩",false)+'<main><div class="sum"><div class="big">'+face+'</div><h2>'+Q.title+'</h2><div class="stats"><div class="st score"><b>'+r.score+'</b>分（百分制）</div><div class="st"><b>'+r.ok+' / '+r.n+'</b>答对题数</div><div class="st"><b>'+fmtSec(r.sec)+'</b>用时</div><div class="st"><b>⭐ '+r.gain+'</b>获得星星</div></div>'+
+  '<div class="row"><button class="btn pri" data-act="retest">🔄 再测一次</button><button class="btn" data-act="backto">📚 返回</button></div></div>';
+ const wr=Q.items.map((q,i)=>({q:q,a:Q.answers[i],i:i})).filter(x=>!(x.a&&x.a.ok));
+ if(wr.length){h+='<div class="panel"><h3 class="m0">📕 错题回顾（'+wr.length+' 题，已加入错题本）</h3>';
+  wr.forEach(x=>{h+='<div class="rv"><div class="rvq"><b>第'+(x.i+1)+'题</b>　'+esc(x.q.label)+'</div><div class="rva">你的答案：<span class="bad">'+(x.a?esc(x.a.v):"未作答")+'</span>　正确答案：<span class="good">'+esc(x.q.ansText)+'</span></div><div class="rve">'+x.q.explain+'</div></div>';});h+='</div>';}
+ else h+='<div class="panel center"><h3>全部答对，太了不起了！</h3></div>';
+ return h+'</main>';}
+
+/* ================= 浏览 ================= */
+function renderBrowse(){let h;
+ if(R.k==="py"){h=header("📋 拼音表",true)+'<main><p class="note">点一点听例字读音（浏览器朗读无法单独读出声母，用例字帮助记忆）。</p>';
+  [["声母","23 个"],["韵母","24 个"],["整体认读音节","16 个"]].forEach(g=>{h+='<div class="sec">'+g[0]+'（'+g[1]+'）</div><div class="grid-py">';PY_ALL.filter(x=>x.c===g[0]).forEach(x=>{h+='<button class="pyc" data-act="say" data-t="'+esc(x.ex)+'"><div class="p py">'+esc(x.p)+'</div><div class="w">例：'+x.ex+'</div></button>';});h+='</div>';});
+  return h+'</main>';}
+ h=header("📜 乘法口诀表",true)+'<main><p class="note">点一句口诀听朗读。北师大版二上：第四单元学 2~5 的口诀，第七单元学 6~9 的口诀。</p><div class="kj">';
+ for(let y=1;y<=9;y++)for(let x=1;x<=9;x++){h+=x<=y?'<button data-act="say" data-t="'+kj(x,y)+'"><div class="a">'+kj(x,y)+'</div><div class="b">'+x+'×'+y+'='+(x*y)+'</div></button>':'<button class="empty" tabindex="-1" aria-hidden="true"></button>';}
+ return h+'</div></main>';}
+
+/* ================= 家长区 ================= */
+let gate=null;
+function openGate(cb,why){const a=rnd(12,39),b=rnd(3,9);gate={a:a,b:b,in:"",cb:cb};const o=document.createElement("div");o.className="overlay";o.id="gate";
+ o.innerHTML='<div class="dialog"><h2>🔒 家长验证</h2><p>'+(why||"请家长算一算：")+'</p><div class="qeq s24">'+a+' × '+b+' = <span class="ans" id="gatebox">?</span></div><div class="pad mt">'+[1,2,3,4,5,6,7,8,9].map(n=>'<button data-act="gkey" data-n="'+n+'">'+n+'</button>').join("")+'<button class="del" data-act="gdel">⌫</button><button data-act="gkey" data-n="0">0</button><button class="ok" data-act="gok">确定</button></div><button class="btn ghost mt" data-act="gcancel">取消</button></div>';
+ document.body.appendChild(o);}
+function testRows(subj){const us=unitsOf(subj);const ids=[];us.forEach(u=>{ids.push([u.id,u.name+(subj==="yuwen"?"·"+u.type:"·"+u.title)]);if(u.no===4)ids.push([PF[subj]+"-mid","📝 期中测试（1～4单元）"]);});ids.push([PF[subj]+"-final","📝 期末测试（全册）"]);
+ return ids.map(([id,nm])=>{const a=D.tests[id]||[];const l=a[a.length-1];const st=findUnit(id)?U(id):null;
+  return '<tr><td>'+esc(nm)+'</td><td>'+(st?(st.ans?st.ans+"题 · "+acc(st)+"%":"—"):"")+'</td><td>'+(l?"<b>"+l.score+"</b>":"—")+'</td><td>'+(a.length?Math.max(...a.map(x=>x.score)):"—")+'</td><td>'+a.length+'</td><td>'+(l?fmtT(l.t):"—")+'</td></tr>';}).join("");}
+function renderParent(){let h=header("👨‍👩‍👧 家长区",true)+'<main>';
+ h+='<div class="panel"><h3 class="m0">📊 总览</h3><p>⭐ 星星总数：<b>'+D.stars+'</b>　🏅 贴纸：<b>'+unlocked()+'/'+STICKERS.length+'</b>　📕 错题本：<b>'+D.wrong.length+'</b> 题</p><table><tr><th>科目</th><th>练习轮数</th><th>答题数</th><th>正确率</th></tr>'+["yuwen","shuxue"].map(k=>{const s=D.subj[k];return '<tr><td>'+SUBJ[k].name+'</td><td>'+s.rounds+'</td><td>'+s.ans+'</td><td>'+acc(s)+'%</td></tr>';}).join("")+'</table></div>';
+ ["yuwen","shuxue"].forEach(k=>{h+='<div class="panel"><h3 class="m0">'+SUBJ[k].ic+' '+SUBJ[k].name+' · 单元测试与期中期末成绩</h3><p class="note">'+SUBJ[k].book+'</p><div class="tscroll"><table><tr><th>单元 / 考试</th><th>练习</th><th>最近成绩</th><th>最高分</th><th>次数</th><th>最近日期</th></tr>'+testRows(k)+'</table></div></div>';});
+ if(D.log.length){h+='<div class="panel"><h3 class="m0">🕘 最近练习与测试</h3><table><tr><th>时间</th><th>内容</th><th>答对</th></tr>'+D.log.slice(0,10).map(l=>'<tr><td>'+fmtT(l.t)+'</td><td>'+esc(l.title)+'</td><td>'+l.ok+'/'+l.n+'</td></tr>').join("")+'</table></div>';}
+ h+='<div class="panel"><h3 class="m0">📕 错题本（'+D.wrong.length+'）</h3>';
+ if(D.wrong.length){h+='<div class="tscroll"><table><tr><th>科目</th><th>单元</th><th>题目</th><th>正确答案</th><th>错误次数</th></tr>'+D.wrong.slice(0,40).map(w=>{const u=w.uid?findUnit(w.uid):null;return '<tr><td>'+SUBJ[w.subj].name+'</td><td>'+(u?u.name:"综合")+'</td><td>'+esc(w.q.label)+'</td><td>'+esc(w.q.ansText)+'</td><td>'+w.n+'</td></tr>';}).join("")+'</table></div><p class="note">孩子再次答对后会自动从错题本移除。</p>';}
+ else h+='<p class="note">目前没有错题。</p>';
+ h+='</div><div class="panel"><h3 class="m0">⚙️ 设置</h3><div class="opts-line"><b>单次使用时长</b><div class="seg">'+[10,15,20,30,45,0].map(n=>'<button class="'+(D.settings.limit===n?"on":"")+'" data-act="limit" data-n="'+n+'">'+(n?n+" 分钟":"不限")+'</button>').join("")+'</div></div>'+
+  '<p class="note">本次已使用约 '+Math.floor(used/60000)+' 分钟，到时会提示孩子休息，需家长验证才能继续。</p>'+
+  '<div class="opts-line"><b>出题时自动朗读</b><div class="seg"><button class="'+(D.settings.auto?"on":"")+'" data-act="auto" data-v="1">开</button><button class="'+(!D.settings.auto?"on":"")+'" data-act="auto" data-v="0">关</button></div></div>'+
+  '<div class="opts-line"><b>朗读语速</b><div class="seg">'+[[0.7,"慢"],[0.85,"适中"],[1,"正常"]].map(r=>'<button class="'+(D.settings.rate===r[0]?"on":"")+'" data-act="rate" data-v="'+r[0]+'">'+r[1]+'</button>').join("")+'</div><button class="btn" data-act="say" data-t="小朋友你好，我们一起来学习吧！">🔊 试听</button></div>'+
+  '<p class="note">朗读状态：'+(!synth?"此浏览器不支持朗读":(voices.length&&!voiceFor("zh-CN")?"未检测到中文语音包，可在系统设置中添加中文语音":"可用"))+'</p></div>'+
+  '<div class="panel"><h3 class="m0">📚 教材说明</h3><p class="note">语文：统编版（人教社）二年级上册（2025年秋季修订版，第三单元为《彩虹》《去外婆家》《数星星的孩子》，第八单元为《称赞》《纸船和风筝》《快乐的小河》）。数学：北师大版二年级上册（2025年秋季版，8个单元）。如果孩子的课本目录不同，请告诉我们调整。</p></div>'+
+  '<div class="panel"><h3 class="m0">🗑️ 数据</h3><p class="note">所有数据只保存在这台设备的浏览器里，不会上传。</p><button class="btn red" data-act="reset">重置全部学习数据</button></div></main>';
+ return h;}
+
+/* ================= 计时休息 / 杂项 ================= */
+let used=0,lastTick=Date.now(),restShown=false;
+setInterval(()=>{const now=Date.now();if(!document.hidden)used+=Math.min(now-lastTick,15000);lastTick=now;if(D.settings.limit&&!restShown&&used>=D.settings.limit*60000)showRest();},5000);
+function showRest(){restShown=true;if(synth)try{synth.cancel();}catch(e){}const o=document.createElement("div");o.className="overlay";o.id="rest";
+ o.innerHTML='<div class="dialog"><div class="big">😴</div><h2>休息一下吧！</h2><p>已经学习 '+D.settings.limit+' 分钟啦。<br>站起来动一动、看看远方，保护眼睛哦～</p><button class="btn pri" data-act="restunlock">家长解锁继续</button></div>';document.body.appendChild(o);speak("已经学了"+D.settings.limit+"分钟啦，休息一下，保护眼睛吧！","zh-CN");}
+function toast(t){const o=document.createElement("div");o.className="toast";o.textContent=t;document.body.appendChild(o);setTimeout(()=>o.remove(),2200);}
+function flyStar(btn){const r=btn?btn.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const s=document.createElement("div");s.className="float-star";s.textContent="⭐";s.style.left=(r.left+r.width/2)+"px";s.style.top=(r.top+r.height/2)+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),1000);}
+function confetti(){const e=["⭐","🎉","🌟","✨","🎈"];for(let i=0;i<18;i++){const c=document.createElement("div");c.className="confetti";c.textContent=pick(e);c.style.left=rnd(0,95)+"vw";c.style.animationDuration=(2+Math.random()*2)+"s";c.style.animationDelay=(Math.random()*.6)+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),4800);}}
+function backFromQuiz(){if(Q.uid)setScreen("unit",{u:Q.uid,tab:"x"});else if(Q.testId){if(TESTS[Q.testId])setScreen("exam",{id:Q.testId});else setScreen("unit",{u:Q.testId,tab:"t"});}else if(Q.mixK)setScreen("mix",{k:Q.mixK});else setScreen("units",{k:Q.subj});}
+
+document.addEventListener("click",ev=>{const t=ev.target.closest("[data-act]");if(!t||t.disabled)return;const a=t.getAttribute("data-act"),ds=t.dataset;ac();
+ switch(a){
+ case "back":
+  if(R.screen==="quiz"){if(Q.mode==="test"){if(!confirm("要退出测试吗？本次测试不会记录成绩。"))return;clearInterval(Q.tick);Q.tick=null;Q.done=true;}clearTimeout(Q.autoT);backFromQuiz();}
+  else if(R.screen==="unit"||R.screen==="exam"||R.screen==="mix")setScreen("units",{k:R.screen==="unit"?findUnit(R.u).subj:(R.k||TESTS[R.id].subj)});
+  else if(R.screen==="browse")setScreen("mix",{k:R.from});
+  else setScreen("home");break;
+ case "home":setScreen("home");break;
+ case "units":SFX.tap();setScreen("units",{k:ds.k});break;
+ case "xiace":toast("二年级下册的内容以后更新，敬请期待！");break;
+ case "unit":SFX.tap();setScreen("unit",{u:ds.u,tab:"k"});break;
+ case "tab":R.tab=ds.t;if(synth)try{synth.cancel();}catch(e){}render();break;
+ case "reveal":{const e=$("#exa"+ds.i);if(e){e.hidden=!e.hidden;t.textContent=e.hidden?"👀 看答案":"🙈 收起答案";}break;}
+ case "exam":setScreen("exam",{id:ds.id});break;
+ case "mix":setScreen("mix",{k:ds.k});break;
+ case "qn":D.settings.qn=+ds.n;save();render();break;
+ case "rg":D.settings.mulRange=ds.r;save();render();break;
+ case "timed":D.settings.timed=ds.v==="1";save();render();break;
+ case "practice":{const u=findUnit(ds.u);SFX.tap();startPractice(genSet([unitSrc(u)],D.settings.qn),{title:u.name+"练习",subj:u.subj,uid:u.id});break;}
+ case "mixstart":{const m=MIX[R.k].find(x=>x[0]===ds.m);startPractice(genSet([{gens:[[m[4],1]],subj:R.k}],D.settings.qn),{title:m[2],subj:R.k,mixK:R.k,modeKey:R.k+m[0]});break;}
+ case "starttest":SFX.tap();startTest(ds.id);break;
+ case "wrongpractice":{const ws=shuffle(D.wrong.filter(w=>w.subj===ds.k)).slice(0,D.settings.qn).map(w=>Object.assign({},w.q));startPractice(ws,{title:"错题本再练",subj:ds.k,fromWrong:true});break;}
+ case "browse":setScreen("browse",{k:ds.k,from:R.k});break;
+ case "say":speak(ds.t,"zh-CN");break;
+ case "speak":{const c=Q.cur;const s=(Q.answered&&c.sayAfter)?c.sayAfter:(c.say||(Q.answered?c.sayAfter:null));if(s)speak(s[0],s[1]);else toast("先自己读一读，答完再听哦～");break;}
+ case "choose":answer(Q.cur.options[+ds.i].v,t);break;
+ case "key":if(Q.answered)return;if(Q.input.length<3)Q.input=(Q.input==="0"?"":Q.input)+ds.n;SFX.tap();$("#ansbox").textContent=Q.input;break;
+ case "del":if(Q.answered)return;Q.input=Q.input.slice(0,-1);$("#ansbox").textContent=Q.input||"?";break;
+ case "submit":if(Q.answered)return;if(!Q.input){toast("先输入答案哦～");return;}answer(String(parseInt(Q.input,10)),null);break;
+ case "next":next();break;
+ case "handin":{const left=Q.items.length-Q.answers.filter(Boolean).length;if(left&&!confirm("还有 "+left+" 题没做，确定交卷吗？"))return;finishTest();break;}
+ case "again":{if(Q.fromWrong){backFromQuiz();break;}if(Q.uid){const u=findUnit(Q.uid);startPractice(genSet([unitSrc(u)],D.settings.qn),{title:Q.title,subj:Q.subj,uid:Q.uid});}
+  else if(Q.mixK){const m=MIX[Q.mixK].find(x=>Q.modeKey===Q.mixK+x[0]);startPractice(genSet([{gens:[[m[4],1]],subj:Q.mixK}],D.settings.qn),{title:Q.title,subj:Q.subj,mixK:Q.mixK,modeKey:Q.modeKey});}else backFromQuiz();break;}
+ case "retest":startTest(Q.testId);break;
+ case "backto":backFromQuiz();break;
+ case "stickers":setScreen("stickers");break;
+ case "parent":openGate(()=>setScreen("parent"));break;
+ case "gkey":if(gate.in.length<4)gate.in+=ds.n;$("#gatebox").textContent=gate.in;break;
+ case "gdel":gate.in=gate.in.slice(0,-1);$("#gatebox").textContent=gate.in||"?";break;
+ case "gok":{const g=$("#gate"),cb=gate.cb;g.remove();if(+gate.in===gate.a*gate.b){gate=null;cb();}else{toast("答案不对，请家长再试一次");openGate(cb);}break;}
+ case "gcancel":$("#gate").remove();gate=null;break;
+ case "limit":D.settings.limit=+ds.n;save();render();break;
+ case "auto":D.settings.auto=ds.v==="1";save();render();break;
+ case "rate":D.settings.rate=+ds.v;save();render();break;
+ case "reset":if(confirm("确定要清空所有星星、进度、测试成绩和错题本吗？此操作无法撤销。")){const keep=D.settings;D=blank();D.settings=keep;save();toast("数据已重置");render();}break;
+ case "restunlock":openGate(()=>{const r=$("#rest");if(r)r.remove();used=0;restShown=false;},"家长验证后可以继续学习：");break;}
+});
+window.addEventListener("pageshow",()=>{lastTick=Date.now();});
+render();
+window.__app={cur:()=>Q&&Q.cur,Q:()=>Q,D:()=>D,YW_UNITS,SX_UNITS,genSet,unitSrc,TESTS,showRest,kj,MIX,startTest};
+
+})();
+</script>
+</body>
+</html>
